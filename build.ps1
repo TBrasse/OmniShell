@@ -10,11 +10,9 @@ $modules = @(
 $settings = Get-Content -Path "$PSScriptRoot\settings.json" `
  | ConvertFrom-Json
 
-$dependencies = $settings.modules
-
 #Load Requirements
 Write-Host "Loading Requirements..."
-$dependencies | ForEach-Object {
+$settings.modules | ForEach-Object {
     $isAvailable = Get-Module -ListAvailable -Name $_.Name `
     | Where-Object -Property Version -Value $_.Version -EQ
     if (!$isAvailable) {
@@ -25,8 +23,10 @@ $dependencies | ForEach-Object {
 
 #Run Test
 $modules | ForEach-Object {
-    Write-Host "Running Tests for $_ ..."
-    Invoke-Pester "$PSScriptRoot\src\$_\"
+    Get-ChildItem -Path "$PSScriptRoot\src\$_\Tests\*.ps1" | ForEach-Object {
+        Write-Host "Running Tests for $($_.Name) ..."
+        Invoke-Pester $_.FullName
+    }
 }
 
 #Run Anylyzer
