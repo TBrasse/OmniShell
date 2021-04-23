@@ -1,0 +1,6 @@
+{
+    "modules": [
+        {"name": "PSScriptAnalyzer", "version": "1.19.1"},
+        {"name": "Pester", "version": "5.0.0"}
+    ]
+}
