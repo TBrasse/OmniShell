@@ -1,0 +1,15 @@
+{
+    "config": [
+        {
+            "Function": "Get-OmnishellDate",
+            "BackgroundColor": "DarkGreen",
+            "NoNewline": true
+        },
+        {
+            "Function": "Get-OmnishellCurrentLocation",
+            "BackgroundColor": "DarkGray",
+            "ForegroundColor": "Black",
+            "NoNewline": true
+        }
+    ]
+}

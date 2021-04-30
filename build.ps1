@@ -1,6 +1,6 @@
 [CmdletBinding()]
 Param(
-
+    [array] $BuildSteps
 )
 
 $modules = @(
@@ -31,6 +31,19 @@ $modules | ForEach-Object {
 
 #Run Anylyzer
 $modules | ForEach-Object {
-    Write-Host "Anylyzing code fror $_ ..."
+    Write-Host "Anylyzing code for $_ ..."
     Invoke-ScriptAnalyzer -Path "$PSScriptRoot\src\$_\" -Recurse
+}
+
+function Import{
+    $modules | ForEach-Object {
+        Remove-Module "$_" -Force
+        Import-Module "$PSScriptRoot\src\$_\$_.psm1"
+        Write-Host "Imported module $_"
+    }
+}
+
+#Run custom steps
+foreach ($buildStep in $BuildSteps){
+    &$buildStep
 }
