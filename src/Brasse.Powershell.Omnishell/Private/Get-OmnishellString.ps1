@@ -1,6 +1,6 @@
 function Get-OmnishellString {
     param(
-        [string] $string
+        [string] $String
     )
-    return $string
+    return $String
 }

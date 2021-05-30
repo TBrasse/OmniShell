@@ -6,19 +6,19 @@ function Get-OmnishellPrompt {
     (Get-Content $ConfigFile | ConvertFrom-Json).config | ForEach-Object {
         #Hyphen
         $params = @{
-            Prompt          = ($_.Hyphen)
-            BackgroundColor = $_.BackgroundColor
-            ForegroundColor = $PreviousBackgroudColor
-            NoNewline       = $true
-        }
-        Write-OmnishellPrompt @params
-        $params = @{
-            Prompt          = ($_.Prefix) + (&($_.Function) $_.Param)
             BackgroundColor = $_.BackgroundColor
             ForegroundColor = $_.ForegroundColor
             NoNewline       = $true
         }
-        Write-OmnishellPrompt @params
+        Write-OmnishellPrompt @params -Prompt ($_.Hyphen) -ForegroundColor $PreviousBackgroudColor
+        $command = $_.Function
+        if($_.Params){
+            $commandParams = $_.Params
+            $commandParamValues = ((Get-Member -InputObject $commandParams -MemberType Properties).Name | ForEach-Object { "-$_ `"$($commandParams.$_)`" "}) -join ""
+            $command += " $commandParamValues"
+        }
+        $commnadResult = Invoke-Expression $command
+        Write-OmnishellPrompt @params -Prompt "$($_.Prefix)$commnadResult"
         if (-not $_.NoNewline) {
             $params = @{
                 Prompt    = ""

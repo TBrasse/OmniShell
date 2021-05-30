@@ -2,14 +2,15 @@
     "config": [
         {
             "Function": "Get-OmnishellDate",
-            "BackgroundColor": "DarkGreen",
+            "BackgroundColor": "Black",
+            "ForegroundColor": "Gray",
             "NoNewline": true,
             "Hyphen" : "",
             "Prefix" : ""
         },
         {
             "Function": "Get-OmnishellAzSubscription",
-            "BackgroundColor": "DarkBlue",
+            "BackgroundColor": "DarkGray",
             "ForegroundColor": "Black",
             "NoNewline": true,
             "Hyphen" : "",
@@ -24,14 +25,13 @@
             "Prefix" : ""
         },
         {
-            "Function": "Get-OmnishellString",
-            "Param": "",
-            "NoNewline": false,
-            "Hyphen" : ""
-        },
-        {
-            "Function": "Get-OmnishellCurrentLocation",
-            "BackgroundColor": "DarkGray",
+            "Function": "Get-OmnishellSeverConnection",
+            "Params" : {
+                "Server":"google.com",
+                "OnConnected":"g+",
+                "OnDiscconnected":"g-"
+            },
+            "BackgroundColor": "DarkYellow",
             "ForegroundColor": "Black",
             "NoNewline": true,
             "Hyphen" : "",
@@ -39,14 +39,34 @@
         },
         {
             "Function": "Get-OmnishellString",
-            "Param": "",
+            "Params": {
+                "String" : ""
+            },
+            "NoNewline": false,
+            "Hyphen" : ""
+        },
+        {
+            "Function": "Get-OmnishellCurrentLocation",
+            "BackgroundColor": "Black",
+            "ForegroundColor": "DarkGray",
+            "NoNewline": true,
+            "Hyphen" : "",
+            "Prefix" : ""
+        },
+        {
+            "Function": "Get-OmnishellString",
+            "Params": {
+                "String" : ""
+            },
             "NoNewline": false,
             "Hyphen" : ""
         },
         {
             "Function": "Get-OmnishellString",
             "ForegroundColor": "DarkGray",
-            "Param": "",
+            "Params": {
+                "String" : ""
+            },
             "NoNewline": true,
             "Hyphen" : ""
     }
