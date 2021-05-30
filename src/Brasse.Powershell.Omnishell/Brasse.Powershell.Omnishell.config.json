@@ -27,7 +27,7 @@
         {
             "Function": "Get-OmnishellSeverConnection",
             "Params" : {
-                "Server":"gossogle.com",
+                "Server":"google.com",
                 "OnConnected":" ",
                 "OnDiscconnected":" "
             },
