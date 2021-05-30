@@ -5,6 +5,7 @@ function Get-OmnishellGit {
     if (Test-Path .git) {
         $branch = git branch --show-current
         $status = git status -s
+        $commits = git log --oneline origin/$branch..HEAD
 
         $result += $branch
         $status | ForEach-Object {
@@ -12,15 +13,18 @@ function Get-OmnishellGit {
             $fileTypes[$Matches.type] ++
         }
 
+        $result += '['
         if ($fileTypes.Count -gt 0) {
-            $result += '['
             $result += foreach ($type in $fileTypes.Keys) {
                 "$type$($fileTypes[$type])"
             }
-            $result += ']'
-        } else {
-            $result += " synced"
         }
+        if($commits.Count -eq 0) {
+            $result += "synced"
+        } else {
+            $result += " C$($commits.Count)"
+        }
+        $result += ']'
     }
     $result
 }
