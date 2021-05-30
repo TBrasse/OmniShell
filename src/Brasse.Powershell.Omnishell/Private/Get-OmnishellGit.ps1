@@ -12,17 +12,16 @@ function Get-OmnishellGit {
             $null = $_ -match "\s*(?<type>.*) (.*)"
             $fileTypes[$Matches.type] ++
         }
-
+        if($commits.Count -ne 0) {
+            $fileTypes["C"] = $commits.Count
+        }
         $result += '['
         if ($fileTypes.Count -gt 0) {
             $result += foreach ($type in $fileTypes.Keys) {
                 "$type$($fileTypes[$type])"
             }
-        }
-        if($commits.Count -eq 0) {
-            $result += "synced"
         } else {
-            $result += " C$($commits.Count)"
+            $result += "synced"
         }
         $result += ']'
     }
