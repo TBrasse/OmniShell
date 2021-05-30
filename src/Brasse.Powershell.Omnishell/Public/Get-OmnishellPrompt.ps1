@@ -19,10 +19,10 @@ function Get-OmnishellPrompt {
         }
         $commnadResult = Invoke-Expression $command
         Write-OmnishellPrompt @params -Prompt "$($_.Prefix)$commnadResult"
-        if (-not $_.NoNewline) {
+        if ($_.Newline) {
             $params = @{
                 Prompt    = ""
-                NoNewline = $false
+                NoNewline = !$_.Newline
             }
             Write-OmnishellPrompt @params
             $PreviousBackgroudColor = (get-host).ui.rawui.BackgroundColor
@@ -31,4 +31,5 @@ function Get-OmnishellPrompt {
             $PreviousBackgroudColor = $_.BackgroundColor
         }
     }
+    " > "
 }

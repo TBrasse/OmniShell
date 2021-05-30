@@ -4,101 +4,92 @@
             "Function": "Get-OmnishellDate",
             "BackgroundColor": "Black",
             "ForegroundColor": "DarkGray",
-            "NoNewline": true,
-            "Hyphen" : "",
-            "Prefix" : ""
+            "Newline": false,
+            "Hyphen": "",
+            "Prefix": ""
         },
         {
             "Function": "Get-OmnishellString",
             "BackgroundColor": "Black",
             "ForegroundColor": "Black",
             "Params": {
-                "String" : ""
+                "String": ""
             },
-            "NoNewline": true,
-            "Hyphen" : ""
+            "Newline": false,
+            "Hyphen": ""
         },
         {
             "Function": "Get-OmnishellAzSubscription",
             "BackgroundColor": "DarkGray",
             "ForegroundColor": "Black",
-            "NoNewline": true,
-            "Hyphen" : "",
-            "Prefix" : " "
+            "Newline": false,
+            "Hyphen": "",
+            "Prefix": " "
         },
         {
             "Function": "Get-OmnishellString",
             "BackgroundColor": "Black",
             "ForegroundColor": "Black",
             "Params": {
-                "String" : ""
+                "String": ""
             },
-            "NoNewline": true,
-            "Hyphen" : ""
+            "Newline": false,
+            "Hyphen": ""
         },
         {
             "Function": "Get-OmnishellGit",
             "BackgroundColor": "DarkGreen",
             "ForegroundColor": "Black",
-            "NoNewline": true,
-            "Hyphen" : "",
-            "Prefix" : " "
+            "Newline": false,
+            "Hyphen": "",
+            "Prefix": " "
         },
         {
             "Function": "Get-OmnishellString",
             "BackgroundColor": "Black",
             "ForegroundColor": "Black",
             "Params": {
-                "String" : ""
+                "String": ""
             },
-            "NoNewline": true,
-            "Hyphen" : ""
+            "Newline": false,
+            "Hyphen": ""
         },
         {
             "Function": "Get-OmnishellSeverConnection",
-            "Params" : {
-                "Server":"google.com",
-                "OnConnected":" ",
-                "OnDiscconnected":" "
+            "Params": {
+                "Server": "google.com",
+                "OnConnected": " ",
+                "OnDiscconnected": " "
             },
             "BackgroundColor": "DarkYellow",
             "ForegroundColor": "Black",
-            "NoNewline": true,
-            "Hyphen" : "",
-            "Prefix" : ""
+            "Newline": false,
+            "Hyphen": "",
+            "Prefix": ""
         },
         {
             "Function": "Get-OmnishellString",
             "Params": {
-                "String" : ""
+                "String": ""
             },
-            "NoNewline": false,
-            "Hyphen" : ""
+            "Newline": true,
+            "Hyphen": ""
         },
         {
             "Function": "Get-OmnishellCurrentLocation",
             "BackgroundColor": "Black",
             "ForegroundColor": "Gray",
-            "NoNewline": true,
-            "Hyphen" : "",
-            "Prefix" : ""
+            "Newline": false,
+            "Hyphen": "",
+            "Prefix": ""
         },
         {
             "Function": "Get-OmnishellString",
             "Params": {
-                "String" : ""
+                "String": ""
             },
-            "NoNewline": false,
-            "Hyphen" : ""
-        },
-        {
-            "Function": "Get-OmnishellString",
-            "ForegroundColor": "DarkGray",
-            "Params": {
-                "String" : ""
-            },
-            "NoNewline": true,
-            "Hyphen" : ""
-    }
+            "Newline": true,
+            "Hyphen": ""
+        }
     ]
 }
