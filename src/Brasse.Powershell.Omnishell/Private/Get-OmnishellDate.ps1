@@ -1,3 +1,3 @@
 function Get-OmnishellDate {
-    "$(Get-Date -Format 'HH:mm:ss')"
+    Get-Date -Format 'HH:mm:ss'
 }

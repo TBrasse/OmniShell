@@ -3,10 +3,20 @@
         {
             "Function": "Get-OmnishellDate",
             "BackgroundColor": "Black",
-            "ForegroundColor": "Gray",
+            "ForegroundColor": "DarkGray",
             "NoNewline": true,
             "Hyphen" : "",
             "Prefix" : ""
+        },
+        {
+            "Function": "Get-OmnishellString",
+            "BackgroundColor": "Black",
+            "ForegroundColor": "Black",
+            "Params": {
+                "String" : ""
+            },
+            "NoNewline": true,
+            "Hyphen" : ""
         },
         {
             "Function": "Get-OmnishellAzSubscription",
@@ -17,12 +27,32 @@
             "Prefix" : " "
         },
         {
+            "Function": "Get-OmnishellString",
+            "BackgroundColor": "Black",
+            "ForegroundColor": "Black",
+            "Params": {
+                "String" : ""
+            },
+            "NoNewline": true,
+            "Hyphen" : ""
+        },
+        {
             "Function": "Get-OmnishellGit",
             "BackgroundColor": "DarkGreen",
             "ForegroundColor": "Black",
             "NoNewline": true,
             "Hyphen" : "",
             "Prefix" : " "
+        },
+        {
+            "Function": "Get-OmnishellString",
+            "BackgroundColor": "Black",
+            "ForegroundColor": "Black",
+            "Params": {
+                "String" : ""
+            },
+            "NoNewline": true,
+            "Hyphen" : ""
         },
         {
             "Function": "Get-OmnishellSeverConnection",
@@ -48,7 +78,7 @@
         {
             "Function": "Get-OmnishellCurrentLocation",
             "BackgroundColor": "Black",
-            "ForegroundColor": "DarkGray",
+            "ForegroundColor": "Gray",
             "NoNewline": true,
             "Hyphen" : "",
             "Prefix" : ""
