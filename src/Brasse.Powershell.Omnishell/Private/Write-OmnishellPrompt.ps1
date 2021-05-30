@@ -1,6 +1,6 @@
 function Write-OmnishellPrompt {
     param(
-        [Parameter(Mandatory)][string] $Prompt,
+        [string] $Prompt,
         [string] $ForegroundColor,
         [string] $BackgroundColor,
         [bool] $NoNewLine
