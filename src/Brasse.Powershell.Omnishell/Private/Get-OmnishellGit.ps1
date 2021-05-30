@@ -19,7 +19,7 @@ function Get-OmnishellGit {
             }
             $result += ']'
         } else {
-            $result += "synced"
+            $result += " synced"
         }
     }
     $result
