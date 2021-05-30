@@ -14,7 +14,7 @@
             "ForegroundColor": "Black",
             "NoNewline": true,
             "Hyphen" : "",
-            "Prefix" : ""
+            "Prefix" : " "
         },
         {
             "Function": "Get-OmnishellGit",
@@ -22,14 +22,14 @@
             "ForegroundColor": "Black",
             "NoNewline": true,
             "Hyphen" : "",
-            "Prefix" : ""
+            "Prefix" : " "
         },
         {
             "Function": "Get-OmnishellSeverConnection",
             "Params" : {
-                "Server":"google.com",
-                "OnConnected":"g+",
-                "OnDiscconnected":"g-"
+                "Server":"gossogle.com",
+                "OnConnected":" ",
+                "OnDiscconnected":" "
             },
             "BackgroundColor": "DarkYellow",
             "ForegroundColor": "Black",
