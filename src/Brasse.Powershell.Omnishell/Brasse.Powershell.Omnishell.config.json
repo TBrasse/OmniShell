@@ -47,12 +47,12 @@
             "Hyphen": ""
         },
         {
-            "Function": "(Test-Connection -TargetName google.com -ResolveDestination -Count 1 -ErrorAction SilentlyContinue).Destination",
+            "Function": "(Invoke-WebRequest google.com -TimeoutSec 1 -DisableKeepAlive -MaximumRetryCount 0).StatusCode",
             "BackgroundColor": "DarkYellow",
             "ForegroundColor": "Black",
             "Newline": false,
             "Hyphen": "",
-            "PerfixOnSuccess" : " ",
+            "OnSuccess" : " ",
             "OnFailure" : " "
         },
         {

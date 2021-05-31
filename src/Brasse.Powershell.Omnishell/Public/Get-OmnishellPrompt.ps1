@@ -13,7 +13,11 @@ function Get-OmnishellPrompt {
         Write-OmnishellPrompt @params -Prompt ($_.Hyphen) -ForegroundColor $PreviousBackgroudColor
         $commandResult = Invoke-Expression $_.Function
         $commandMessage = if ($commandResult) {
-            $_.PerfixOnSuccess+$commandResult
+            if($_.OnSuccess){
+                $_.OnSuccess
+            }else{
+                $_.PerfixOnSuccess+$commandResult
+            }
         } else {
             $_.OnFailure
         }
