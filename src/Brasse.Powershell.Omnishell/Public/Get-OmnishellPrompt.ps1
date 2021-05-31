@@ -11,14 +11,13 @@ function Get-OmnishellPrompt {
             NoNewline       = $true
         }
         Write-OmnishellPrompt @params -Prompt ($_.Hyphen) -ForegroundColor $PreviousBackgroudColor
-        $command = $_.Function
-        if($_.Params){
-            $commandParams = $_.Params
-            $commandParamValues = ((Get-Member -InputObject $commandParams -MemberType Properties).Name | ForEach-Object { "-$_ `"$($commandParams.$_)`" "}) -join ""
-            $command += " $commandParamValues"
+        $commandResult = Invoke-Expression $_.Function
+        $commandMessage = if ($commandResult) {
+            $_.PerfixOnSuccess+$commandResult
+        } else {
+            $_.OnFailure
         }
-        $commnadResult = Invoke-Expression $command
-        Write-OmnishellPrompt @params -Prompt "$($_.Prefix)$commnadResult"
+        Write-OmnishellPrompt @params -Prompt $commandMessage
         if ($_.Newline) {
             $params = @{
                 Prompt    = ""
