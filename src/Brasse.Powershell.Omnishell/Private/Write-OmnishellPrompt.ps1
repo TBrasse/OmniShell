@@ -3,7 +3,7 @@ function Write-OmnishellPrompt {
         [string] $Prompt,
         [string] $ForegroundColor,
         [string] $BackgroundColor,
-        [bool] $NoNewLine
+        [bool] $NewLine
     )
     $param = @{
         Object = $Prompt
@@ -14,8 +14,8 @@ function Write-OmnishellPrompt {
     if($BackgroundColor){
         $param.add( "BackgroundColor", $BackgroundColor )
     }
-    if($NoNewLine){
-        $param.add( "NoNewLine", $NoNewLine )
+    if(-not $NewLine){
+        $param.add( "NoNewLine", !$NewLine )
     }
     Write-Host @param
 }

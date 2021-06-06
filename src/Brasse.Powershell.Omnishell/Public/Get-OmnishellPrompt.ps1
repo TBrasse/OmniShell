@@ -2,15 +2,15 @@ function Get-OmnishellPrompt {
     param(
         [Parameter(Mandatory)][string] $ConfigFile
     )
-    $PreviousBackgroudColor = (get-host).ui.rawui.BackgroundColor
     (Get-Content $ConfigFile | ConvertFrom-Json).config | ForEach-Object {
         #Hyphen
-        $params = @{
-            BackgroundColor = $_.BackgroundColor
-            ForegroundColor = $_.ForegroundColor
-            NoNewline       = $true
+        $hyphenParams = @{
+            BackgroundColor = $_.Hyphen.BackgroundColor
+            ForegroundColor = $_.Hyphen.ForegroundColor
+            Prompt = $_.Hyphen.Prefix
+            Newline       = $false
         }
-        Write-OmnishellPrompt @params -Prompt ($_.Hyphen) -ForegroundColor $PreviousBackgroudColor
+        Write-OmnishellPrompt @hyphenParams
         $commandResult = Invoke-Expression $_.Function
         $commandMessage = if ($commandResult) {
             if($_.OnSuccess){
@@ -21,18 +21,25 @@ function Get-OmnishellPrompt {
         } else {
             $_.OnFailure
         }
-        Write-OmnishellPrompt @params -Prompt $commandMessage
-        if ($_.Newline) {
-            $params = @{
-                Prompt    = ""
-                NoNewline = !$_.Newline
-            }
-            Write-OmnishellPrompt @params
-            $PreviousBackgroudColor = (get-host).ui.rawui.BackgroundColor
+        $params = @{
+            BackgroundColor = $_.BackgroundColor
+            ForegroundColor = $_.ForegroundColor
+            Prompt = $commandMessage
+            Newline       = $false
         }
-        else {
-            $PreviousBackgroudColor = $_.BackgroundColor
+        Write-OmnishellPrompt @params
+
+        $hyphenParams = @{
+            BackgroundColor = $_.Hyphen.BackgroundColor
+            ForegroundColor = $_.Hyphen.ForegroundColor
+            Prompt = $_.Hyphen.Suffix
+            Newline       = $false
+        }
+        Write-OmnishellPrompt @hyphenParams
+
+        if ($_.Newline) {
+            Write-OmnishellPrompt -Prompt "" -Newline $true
         }
     }
-    " > "
+    "> "
 }

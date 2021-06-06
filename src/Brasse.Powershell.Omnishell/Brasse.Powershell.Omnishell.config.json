@@ -4,15 +4,7 @@
             "Function": "Get-Date -Format 'HH:mm:ss'",
             "BackgroundColor": "Black",
             "ForegroundColor": "DarkGray",
-            "Newline": false,
-            "Hyphen": ""
-        },
-        {
-            "Function": "echo \"\"",
-            "BackgroundColor": "Black",
-            "ForegroundColor": "Black",
-            "Newline": false,
-            "Hyphen": ""
+            "Newline": false
         },
         {
             "Function": "(Get-AzContext).Subscription.Name",
@@ -21,37 +13,35 @@
             "PerfixOnSuccess" : " ",
             "OnFailure" : " ",
             "Newline": false,
-            "Hyphen": ""
-        },
-        {
-            "Function": "echo \"\"",
-            "BackgroundColor": "Black",
-            "ForegroundColor": "Black",
-            "Newline": false,
-            "Hyphen": ""
+            "Hyphen": {
+                "Suffix" : "",
+                "Prefix" : "",
+                "ForegroundColor": "DarkGray"
+            }
         },
         {
             "Function": "Get-OmnishellGit",
             "BackgroundColor": "DarkGreen",
             "ForegroundColor": "Black",
             "Newline": false,
-            "Hyphen": "",
+            "Hyphen": {
+                "Suffix" : "",
+                "Prefix" : "",
+                "ForegroundColor": "DarkGreen"
+            },
             "PerfixOnSuccess" : " ",
             "OnFailure" : " "
         },
         {
-            "Function": "echo \"\"",
-            "BackgroundColor": "Black",
-            "ForegroundColor": "Black",
-            "Newline": false,
-            "Hyphen": ""
-        },
-        {
-            "Function": "(Invoke-WebRequest google.com -TimeoutSec 1 -DisableKeepAlive -MaximumRetryCount 0).StatusCode",
+            "Function": "Resolve-DnsName google.com -Type A -DnsOnly -QuickTimeout",
             "BackgroundColor": "DarkYellow",
             "ForegroundColor": "Black",
             "Newline": false,
-            "Hyphen": "",
+            "Hyphen": {
+                "Suffix" : "",
+                "Prefix" : "",
+                "ForegroundColor": "DarkYellow"
+            },
             "OnSuccess" : " ",
             "OnFailure" : " "
         },
@@ -59,22 +49,19 @@
             "Function": "echo \"\"",
             "BackgroundColor": "Black",
             "ForegroundColor": "Black",
-            "Newline": true,
-            "Hyphen": ""
+            "Newline": true
         },
         {
             "Function": "$executionContext.SessionState.Path.CurrentLocation",
             "BackgroundColor": "Black",
             "ForegroundColor": "Gray",
-            "Newline": false,
-            "Hyphen": ""
+            "Newline": false
         },
         {
             "Function": "echo \"\"",
             "BackgroundColor": "Black",
             "ForegroundColor": "Black",
-            "Newline": true,
-            "Hyphen": ""
+            "Newline": true
         }
     ]
 }
