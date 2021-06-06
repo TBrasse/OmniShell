@@ -1,67 +1,95 @@
 {
-    "config": [
+    "default": [
         {
-            "Function": "Get-Date -Format 'HH:mm:ss'",
-            "BackgroundColor": "Black",
-            "ForegroundColor": "DarkGray",
-            "Newline": false
+            "name": "date",
+            "expressions": [
+                {
+                    "expression": "Get-Date -Format 'HH:mm:ss'",
+                    "backgroundColor": "Black",
+                    "foregroundColor": "DarkGray"
+                }
+            ]
         },
         {
-            "Function": "(Get-AzContext).Subscription.Name",
-            "BackgroundColor": "DarkGray",
-            "ForegroundColor": "Black",
-            "PerfixOnSuccess" : " ",
-            "OnFailure" : " ",
-            "Newline": false,
-            "Hyphen": {
-                "Suffix" : "",
-                "Prefix" : "",
-                "ForegroundColor": "DarkGray"
-            }
+            "name": "azcontext",
+            "expressions": [
+                {
+                    "expression": "$result = (Get-AzContext).Subscription.Name"
+                },
+                {
+                    "expression": "''",
+                    "foregroundColor": "DarkGray"
+                },
+                {
+                    "expression": "if($result){\" $result\"} else {' '}",
+                    "backgroundColor": "DarkGray",
+                    "foregroundColor": "Black"
+                },
+                {
+                    "expression": "''",
+                    "foregroundColor": "DarkGray"
+                }
+            ]
         },
         {
-            "Function": "Get-OmnishellGit",
-            "BackgroundColor": "DarkGreen",
-            "ForegroundColor": "Black",
-            "Newline": false,
-            "Hyphen": {
-                "Suffix" : "",
-                "Prefix" : "",
-                "ForegroundColor": "DarkGreen"
-            },
-            "PerfixOnSuccess" : " ",
-            "OnFailure" : " "
+            "name": "git",
+            "expressions": [
+                {
+                    "expression": "$result = Get-OmnishellGit"
+                },
+                {
+                    "expression": "''",
+                    "foregroundColor": "DarkGreen"
+                },
+                {
+                    "expression": "if($result){\" $result\"}else{' '}",
+                    "backgroundColor": "DarkGreen",
+                    "foregroundColor": "Black"
+                },
+                {
+                    "expression": "''",
+                    "foregroundColor": "DarkGreen"
+                }
+            ]
         },
         {
-            "Function": "Resolve-DnsName google.com -Type A -DnsOnly -QuickTimeout",
-            "BackgroundColor": "DarkYellow",
-            "ForegroundColor": "Black",
-            "Newline": false,
-            "Hyphen": {
-                "Suffix" : "",
-                "Prefix" : "",
-                "ForegroundColor": "DarkYellow"
-            },
-            "OnSuccess" : " ",
-            "OnFailure" : " "
+            "name": "vpnTest",
+            "expressions": [
+                {
+                    "expression": "$result = Resolve-DnsName google.com -Type A -DnsOnly -QuickTimeout"
+                },
+                {
+                    "expression": "''",
+                    "foregroundColor": "DarkYellow"
+                },
+                {
+                    "expression": "if($result){' '}else{' '}",
+                    "backgroundColor": "DarkYellow",
+                    "foregroundColor": "Black"
+                },
+                {
+                    "expression": "''",
+                    "foregroundColor": "DarkYellow"
+                },
+                {
+                    "expression": " ",
+                    "newline": true
+                }
+            ]
         },
         {
-            "Function": "echo \"\"",
-            "BackgroundColor": "Black",
-            "ForegroundColor": "Black",
-            "Newline": true
-        },
-        {
-            "Function": "$executionContext.SessionState.Path.CurrentLocation",
-            "BackgroundColor": "Black",
-            "ForegroundColor": "Gray",
-            "Newline": false
-        },
-        {
-            "Function": "echo \"\"",
-            "BackgroundColor": "Black",
-            "ForegroundColor": "Black",
-            "Newline": true
+            "name": "path",
+            "expressions": [
+                {
+                    "expression": "$executionContext.SessionState.Path.CurrentLocation",
+                    "backgroundColor": "Black",
+                    "foregroundColor": "Gray"
+                },
+                {
+                    "expression": " ",
+                    "newline": true
+                }
+            ]
         }
     ]
 }

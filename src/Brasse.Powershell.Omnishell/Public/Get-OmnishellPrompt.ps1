@@ -1,44 +1,24 @@
 function Get-OmnishellPrompt {
     param(
-        [Parameter(Mandatory)][string] $ConfigFile
+        [Parameter(Mandatory)][string] $ConfigFile,
+        [string] $ProfileName = "default"
     )
-    (Get-Content $ConfigFile | ConvertFrom-Json).config | ForEach-Object {
-        #Hyphen
-        $hyphenParams = @{
-            BackgroundColor = $_.Hyphen.BackgroundColor
-            ForegroundColor = $_.Hyphen.ForegroundColor
-            Prompt = $_.Hyphen.Prefix
-            Newline       = $false
-        }
-        Write-OmnishellPrompt @hyphenParams
-        $commandResult = Invoke-Expression $_.Function
-        $commandMessage = if ($commandResult) {
-            if($_.OnSuccess){
-                $_.OnSuccess
-            }else{
-                $_.PerfixOnSuccess+$commandResult
+    (Get-Content $ConfigFile | ConvertFrom-Json -AsHashtable)."$ProfileName" | ForEach-Object {
+        $segmentName = $_.name
+        try {
+            foreach ($expression in $_.expressions) {
+                $prompt = (Invoke-Expression $expression.expression)
+                $params = @{
+                    BackgroundColor = $expression.backgroundColor
+                    ForegroundColor = $expression.foregroundColor
+                    Prompt          = $prompt
+                    NewLine         = [bool]$expression.newline
+                }
+                Write-OmnishellPrompt @params
             }
-        } else {
-            $_.OnFailure
         }
-        $params = @{
-            BackgroundColor = $_.BackgroundColor
-            ForegroundColor = $_.ForegroundColor
-            Prompt = $commandMessage
-            Newline       = $false
-        }
-        Write-OmnishellPrompt @params
-
-        $hyphenParams = @{
-            BackgroundColor = $_.Hyphen.BackgroundColor
-            ForegroundColor = $_.Hyphen.ForegroundColor
-            Prompt = $_.Hyphen.Suffix
-            Newline       = $false
-        }
-        Write-OmnishellPrompt @hyphenParams
-
-        if ($_.Newline) {
-            Write-OmnishellPrompt -Prompt "" -Newline $true
+        catch {
+            Write-Error "segment $segmentName thrown error $_"
         }
     }
     "> "
