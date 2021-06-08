@@ -2,7 +2,7 @@ function Get-OmnishellGit {
 
     $fileTypes = @{}
     $result = ""
-    if (Test-Path .git) {
+    if (git rev-parse --is-inside-work-tree) {
         $branch = git branch --show-current
         $status = git status -s
         $commits = git log --oneline origin/$branch..HEAD
