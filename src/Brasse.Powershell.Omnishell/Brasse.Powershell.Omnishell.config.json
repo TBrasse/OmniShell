@@ -81,9 +81,15 @@
             "name": "path",
             "expressions": [
                 {
-                    "expression": "$executionContext.SessionState.Path.CurrentLocation",
+                    "expression": "$result = $executionContext.SessionState.Path.CurrentLocation"
+                },
+                {
+                    "expression": "$result",
                     "backgroundColor": "Black",
                     "foregroundColor": "Gray"
+                },
+                {
+                    "expression": "$Host.UI.RawUI.WindowTitle = $result"
                 },
                 {
                     "expression": " ",
