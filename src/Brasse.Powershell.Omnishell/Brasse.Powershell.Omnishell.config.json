@@ -38,11 +38,14 @@
                     "expression": "$result = Get-OmnishellGit"
                 },
                 {
+                    "expression": "if($result) { $title = Split-Path -LeafBase (git remote get-url origin) }"
+                },
+                {
                     "expression": "''",
                     "foregroundColor": "DarkGreen"
                 },
                 {
-                    "expression": "if($result){\" $result\"}else{' '}",
+                    "expression": "if($result) {\" $result\"} else {' '}",
                     "backgroundColor": "DarkGreen",
                     "foregroundColor": "Black"
                 },
@@ -63,7 +66,7 @@
                     "foregroundColor": "DarkYellow"
                 },
                 {
-                    "expression": "if($result){' '}else{' '}",
+                    "expression": "if($result) {' '} else {' '}",
                     "backgroundColor": "DarkYellow",
                     "foregroundColor": "Black"
                 },
@@ -89,7 +92,7 @@
                     "foregroundColor": "Gray"
                 },
                 {
-                    "expression": "$Host.UI.RawUI.WindowTitle = $result"
+                    "expression": "$Host.UI.RawUI.WindowTitle = if($title) {$title} else {$result}"
                 },
                 {
                     "expression": " ",
