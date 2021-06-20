@@ -9,7 +9,7 @@ function Get-OmnishellGit {
 
         $result += $branch
         $status | ForEach-Object {
-            $null = $_ -match "\s*(?<type>.*) (.*)"
+            $null = $_ -match "\s*(?<type>\S*) .*"
             $fileTypes[$Matches.type] ++
         }
         if($commits.Count -ne 0) {
