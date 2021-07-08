@@ -11,6 +11,32 @@
             ]
         },
         {
+            "name": "platform",
+            "expressions": [
+                {
+                    "expression": "$result = [Environment]::OSVersion.Platform"
+                },
+                {
+                    "expression": "''",
+                    "foregroundColor": "Blue"
+                },
+                {
+                    "expression": "if($result -eq 'Win32NT') {''}",
+                    "foregroundColor": "Black",
+                    "backgroundColor": "Blue"
+                },
+                {
+                    "expression": "if($result -eq 'Unix') {''}",
+                    "foregroundColor": "Black",
+                    "backgroundColor": "Blue"
+                },
+                {
+                    "expression": "''",
+                    "foregroundColor": "Blue"
+                }
+            ]
+        },
+        {
             "name": "azcontext",
             "expressions": [
                 {
@@ -59,7 +85,7 @@
             "name": "vpnTest",
             "expressions": [
                 {
-                    "expression": "$result = Resolve-DnsName google.com -Type A -DnsOnly -QuickTimeout"
+                    "expression": "$result = Test-Connection -ResolveDestination -TargetName git.kcura.corp -Count 1 -TimeoutSeconds 1 -ErrorAction SilentlyContinue"
                 },
                 {
                     "expression": "''",
