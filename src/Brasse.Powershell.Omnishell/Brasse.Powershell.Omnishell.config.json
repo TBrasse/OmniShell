@@ -79,7 +79,7 @@
                 "name": "vpnTest",
                 "expressions": [
                     {
-                        "expression": "$result = Test-Connection -ResolveDestination -TargetName git.kcura.corp -Count 1 -TimeoutSeconds 1 -ErrorAction SilentlyContinue"
+                        "expression": "$result = Test-Connection -ResolveDestination -TargetName google.com -Count 1 -TimeoutSeconds 1 -ErrorAction SilentlyContinue"
                     },
                     {
                         "expression": "''",
