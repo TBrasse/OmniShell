@@ -3,17 +3,15 @@ $ConfigEnding = "## OmniShell Config End"
 $Regex = "(?<ProfileBefore>(.|\n)*)?(?<Config>$ConfigBegining(.|\n)*$ConfigEnding)(?<ProfileAfter>(.|\n)*)?"
 
 $Config="$ConfigBegining
-    import-module D:\Workspace\Projects\OmniShell\src\Brasse.Powershell.Omnishell\Brasse.Powershell.Omnishell.psm1
-    function prompt {
-        Get-OmnishellPrompt -ConfigFile D:\Workspace\Projects\OmniShell\src\Brasse.Powershell.Omnishell\Brasse.Powershell.Omnishell.config.json
-    }
+    import-module $PSScriptRoot\..\Brasse.Powershell.Omnishell.psm1
 $ConfigEnding
 "
 
 function Set-Omnishell {
     [CmdletBinding(SupportsShouldProcess)]
     Param(
-        [switch] $Install
+        [switch] $Install,
+        [string] $ConfigPath
     )
 
     if($Install){
@@ -24,5 +22,8 @@ function Set-Omnishell {
             $newProfile = $profileContent+$Config
         }
         Set-Content -Path $profile -Value $newProfile
+    }
+    if($null -eq $Config){
+        $Global:Omnishell.Config = $ConfigPath
     }
 }
