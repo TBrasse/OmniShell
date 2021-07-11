@@ -1,6 +1,6 @@
 function Get-OmnishellPrompt {
     param(
-        [Parameter(Mandatory)][string] $ConfigFile
+        [string] $ConfigFile = $Global:Omnishell.Config
     )
     $totalSize = 0
     $consoleSize = $Host.UI.RawUI.WindowSize.Width
