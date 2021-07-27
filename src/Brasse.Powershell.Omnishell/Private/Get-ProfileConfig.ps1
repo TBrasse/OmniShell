@@ -4,7 +4,7 @@ function Get-ProfileConfig {
     $Regex = "(?<ProfileBefore>(.|\n)*)?(?<Config>$ConfigBegining(.|\n)*$ConfigEnding)(?<ProfileAfter>(.|\n)*)?"
 
 $Config = "$ConfigBegining
-import-module $PSScriptRoot\..\Brasse.Powershell.Omnishell.psm1
+import-module $(Join-Path $PSScriptRoot ".." "Brasse.Powershell.Omnishell.psm1")
 $ConfigEnding"
     @{
         "Config" = $Config

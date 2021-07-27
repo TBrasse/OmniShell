@@ -1,0 +1,246 @@
+{
+    "switch": "switch([Environment]::OSVersion.Platform){ 'Win32NT'{'default'} 'Unix'{'Unix'}}",
+    "profiles": {
+        "default": [
+            {
+                "name": "date",
+                "expressions": [
+                    {
+                        "expression": "Get-Date -Format 'HH:mm:ss'",
+                        "backgroundColor": "Black",
+                        "foregroundColor": "DarkGray"
+                    }
+                ]
+            },
+            {
+                "name": "platform",
+                "expressions": [
+                    {
+                        "expression": "''",
+                        "foregroundColor": "Blue"
+                    },
+                    {
+                        "expression": "''",
+                        "foregroundColor": "Black",
+                        "backgroundColor": "Blue"
+                    },
+                    {
+                        "expression": "''",
+                        "foregroundColor": "Blue"
+                    }
+                ]
+            },
+            {
+                "name": "azcontext",
+                "expressions": [
+                    {
+                        "expression": "$result = (Get-AzContext).Subscription.Name"
+                    },
+                    {
+                        "expression": "''",
+                        "foregroundColor": "DarkGray"
+                    },
+                    {
+                        "expression": "if($result){\" $result\"} else {' '}",
+                        "backgroundColor": "DarkGray",
+                        "foregroundColor": "Black"
+                    },
+                    {
+                        "expression": "''",
+                        "foregroundColor": "DarkGray"
+                    }
+                ]
+            },
+            {
+                "name": "git",
+                "expressions": [
+                    {
+                        "expression": "$result = Get-OmnishellGit"
+                    },
+                    {
+                        "expression": "if($result) { $title = Split-Path -LeafBase (git remote get-url origin) }"
+                    },
+                    {
+                        "expression": "''",
+                        "foregroundColor": "DarkGreen"
+                    },
+                    {
+                        "expression": "if($result) {\" $result\"} else {' '}",
+                        "backgroundColor": "DarkGreen",
+                        "foregroundColor": "Black"
+                    },
+                    {
+                        "expression": "''",
+                        "foregroundColor": "DarkGreen"
+                    }
+                ]
+            },
+            {
+                "name": "vpnTest",
+                "expressions": [
+                    {
+                        "expression": "$result = Test-Connection -ResolveDestination -TargetName google.com -Count 1 -TimeoutSeconds 1 -ErrorAction SilentlyContinue"
+                    },
+                    {
+                        "expression": "''",
+                        "foregroundColor": "DarkYellow"
+                    },
+                    {
+                        "expression": "if($result) {' '} else {' '}",
+                        "backgroundColor": "DarkYellow",
+                        "foregroundColor": "Black"
+                    },
+                    {
+                        "expression": "''",
+                        "foregroundColor": "DarkYellow"
+                    },
+                    {
+                        "expression": " ",
+                        "newline": true
+                    }
+                ]
+            },
+            {
+                "name": "path",
+                "expressions": [
+                    {
+                        "expression": "$result = $executionContext.SessionState.Path.CurrentLocation"
+                    },
+                    {
+                        "expression": "$result",
+                        "backgroundColor": "Black",
+                        "foregroundColor": "Gray"
+                    },
+                    {
+                        "expression": "$Host.UI.RawUI.WindowTitle = if($title) {$title} else {$result}"
+                    },
+                    {
+                        "expression": " ",
+                        "newline": true
+                    }
+                ]
+            }
+        ],
+        "Unix": [
+            {
+                "name": "date",
+                "expressions": [
+                    {
+                        "expression": "Get-Date -Format 'HH:mm:ss'",
+                        "backgroundColor": "Black",
+                        "foregroundColor": "DarkGray"
+                    }
+                ]
+            },
+            {
+                "name": "platform",
+                "expressions": [
+                    {
+                        "expression": "''",
+                        "foregroundColor": "Blue"
+                    },
+                    {
+                        "expression": "''",
+                        "foregroundColor": "Black",
+                        "backgroundColor": "Blue"
+                    },
+                    {
+                        "expression": "''",
+                        "foregroundColor": "Blue"
+                    }
+                ]
+            },
+            {
+                "name": "azcontext",
+                "expressions": [
+                    {
+                        "expression": "$result = (Get-AzContext).Subscription.Name"
+                    },
+                    {
+                        "expression": "''",
+                        "foregroundColor": "DarkGray"
+                    },
+                    {
+                        "expression": "if($result){\" $result\"} else {' '}",
+                        "backgroundColor": "DarkGray",
+                        "foregroundColor": "Black"
+                    },
+                    {
+                        "expression": "''",
+                        "foregroundColor": "DarkGray"
+                    }
+                ]
+            },
+            {
+                "name": "git",
+                "expressions": [
+                    {
+                        "expression": "$result = Get-OmnishellGit"
+                    },
+                    {
+                        "expression": "if($result) { $title = Split-Path -LeafBase (git remote get-url origin) }"
+                    },
+                    {
+                        "expression": "''",
+                        "foregroundColor": "DarkGreen"
+                    },
+                    {
+                        "expression": "if($result) {\" $result\"} else {' '}",
+                        "backgroundColor": "DarkGreen",
+                        "foregroundColor": "Black"
+                    },
+                    {
+                        "expression": "''",
+                        "foregroundColor": "DarkGreen"
+                    }
+                ]
+            },
+            {
+                "name": "vpnTest",
+                "expressions": [
+                    {
+                        "expression": "$result = Test-Connection -ResolveDestination -TargetName git.kcura.corp -Count 1 -TimeoutSeconds 1 -ErrorAction SilentlyContinue"
+                    },
+                    {
+                        "expression": "''",
+                        "foregroundColor": "DarkYellow"
+                    },
+                    {
+                        "expression": "if($result) {' '} else {' '}",
+                        "backgroundColor": "DarkYellow",
+                        "foregroundColor": "Black"
+                    },
+                    {
+                        "expression": "''",
+                        "foregroundColor": "DarkYellow"
+                    },
+                    {
+                        "expression": " ",
+                        "newline": true
+                    }
+                ]
+            },
+            {
+                "name": "path",
+                "expressions": [
+                    {
+                        "expression": "$result = $executionContext.SessionState.Path.CurrentLocation"
+                    },
+                    {
+                        "expression": "$result",
+                        "backgroundColor": "Black",
+                        "foregroundColor": "Gray"
+                    },
+                    {
+                        "expression": "$Host.UI.RawUI.WindowTitle = if($title) {$title} else {$result}"
+                    },
+                    {
+                        "expression": " ",
+                        "newline": true
+                    }
+                ]
+            }
+        ]
+    },
+    "version" : "0.1.0"
+}
