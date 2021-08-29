@@ -7,10 +7,9 @@ function Get-FileCash {
     $cashLocation = "$env:APPDATA\Omnishell"
 
     $content = Get-Content -Path "$cashLocation\$CashName.json" -ErrorAction SilentlyContinue
-    $content = $content -join ""
-    $currentCash = ConvertFrom-Json -InputObject $content -AsHashtable -ErrorAction SilentlyContinue
+    $currentCash = $content | ConvertFrom-Json -AsHashtable -Depth 100 -ErrorAction SilentlyContinue
     if ($null -eq $content -or $null -eq $currentCash) {
-        @{}
+        $currentCash = @{}
     }
     $currentCash
 }

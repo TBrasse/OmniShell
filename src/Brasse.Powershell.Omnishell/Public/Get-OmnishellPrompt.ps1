@@ -23,23 +23,28 @@ function Get-OmnishellPrompt {
         #     Write-OmnishellPrompt @segementParams
         # }
         try {
-
-            $expressionsParams = foreach ($expression in $_.expressions) {
-                $prompt = (Invoke-Expression $expression.expression)
-                $expressionSize += $prompt.Length
-                @{
-                    BackgroundColor = $expression.backgroundColor
-                    ForegroundColor = $expression.foregroundColor
-                    Prompt          = $prompt
-                    NewLine         = [bool]$expression.newline
-                }
+            $segmentJob = Get-Job -Name "OmniShell_$segmentName"
+            if($null -eq $segmentJob) {
+                Start-SegmentJob -Segment $_
+            }else{
+                $segementExpressions = Get-FileCash -CashName $segmentName
             }
+            # $segementExpressions = foreach ($expression in $_.expressions) {
+            #     $prompt = (Invoke-Expression $expression.expression)
+            #     $expressionSize += $prompt.Length
+            #     @{
+            #         BackgroundColor = $expression.backgroundColor
+            #         ForegroundColor = $expression.foregroundColor
+            #         Prompt          = $prompt
+            #         NewLine         = [bool]$expression.newline
+            #     }
+            # }
             if($totalSize + $expressionSize -gt $consoleSize){
                 Write-OmnishellPrompt -NewLine $true
             } else {
                 $totalSize += $expressionSize
             }
-            foreach($params in $expressionsParams){
+            foreach($params in $segementExpressions){
                 Write-OmnishellPrompt @params
             }
         }
