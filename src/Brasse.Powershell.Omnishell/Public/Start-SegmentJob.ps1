@@ -5,11 +5,13 @@ function Start-SegmentJob {
     )
 
     process {
+        $parentPid = $PID
         $segmentName = $Segment.name
-        $null = Start-Job -Name "OmniShell_$segmentName" -ScriptBlock {
+        $null = Start-Job -Name (Get-OmnishellJobName -SegmentName $segmentName) -ScriptBlock {
             param(
                 [hashtable] $Segment,
-                [string] $ModulePath
+                [string] $ModulePath,
+                [string] $ParentPid
             )
             $segmentName = $Segment.name
             $segmentExpressions = $Segment.expressions
@@ -17,6 +19,9 @@ function Start-SegmentJob {
             while ($true) {
                 $segmentValue += foreach ($expression in $segmentExpressions) {
                     $prompt = (Invoke-Expression $expression.expression)
+                    $prompt = if($null -ne $prompt){
+                        $prompt.ToString()
+                    }
                     $expressionSize += $prompt.Length
                     @{
                         BackgroundColor = $expression.backgroundColor
@@ -25,10 +30,10 @@ function Start-SegmentJob {
                         NewLine         = [bool]$expression.newline
                     }
                 }
-                Set-FileCash -CashName $segmentName -CashValue $segmentValue
-                Start-Sleep -Milliseconds 500
+                Set-FileCash -CashName (Get-OmnishellCashName -ParentPid $ParentPid -SegmentName $segmentName) -CashValue $segmentValue
                 $segmentValue = @()
+                Start-Sleep -Milliseconds 500
             }
-        } -ArgumentList $Segment, "$PSScriptRoot\..\Brasse.Powershell.Omnishell.psm1"
+        } -ArgumentList $Segment, "$PSScriptRoot\..\Brasse.Powershell.Omnishell.psm1", $parentPid
     }
 }

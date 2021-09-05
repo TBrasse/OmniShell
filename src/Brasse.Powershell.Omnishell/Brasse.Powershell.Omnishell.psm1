@@ -34,9 +34,9 @@ else {
     Update-Config
 }
 
-function prompt {
-    Get-OmnishellPrompt -ConfigFile $Global:Omnishell.Config
-}
+# function prompt {
+#     Get-OmnishellPrompt -ConfigFile $Global:Omnishell.Config
+# }
 
 Export-ModuleMember -Function $public.BaseName
 Export-ModuleMember -Function prompt

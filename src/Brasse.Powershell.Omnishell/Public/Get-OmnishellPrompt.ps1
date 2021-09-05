@@ -23,11 +23,11 @@ function Get-OmnishellPrompt {
         #     Write-OmnishellPrompt @segementParams
         # }
         try {
-            $segmentJob = Get-Job -Name "OmniShell_$segmentName"
+            $segmentJob = Get-Job -Name (Get-OmnishellJobName -SegmentName $segmentName)
             if($null -eq $segmentJob) {
                 Start-SegmentJob -Segment $_
             }else{
-                $segementExpressions = Get-FileCash -CashName $segmentName
+                $segementExpressions = Get-FileCash -CashName (Get-OmnishellCashName -ParentPid $PID -SegmentName $segmentName)
             }
             # $segementExpressions = foreach ($expression in $_.expressions) {
             #     $prompt = (Invoke-Expression $expression.expression)
