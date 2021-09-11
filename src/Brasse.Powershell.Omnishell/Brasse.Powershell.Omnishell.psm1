@@ -17,6 +17,9 @@ if ($null -eq $Global:Omnishell.AppDir) {
 if ($null -eq $Global:Omnishell.Config) {
     $Global:Omnishell.Config = Join-Path $Global:Omnishell.AppDir "config.json"
 }
+if ($null -eq $Global:Omnishell.Disabled){
+    $Global:Omnishell.Disabled = @{}
+}
 if(-not (Test-Path -Path $Global:Omnishell.AppDir)){
     New-Item -Path $Global:Omnishell.AppDir -ItemType Directory
 }
