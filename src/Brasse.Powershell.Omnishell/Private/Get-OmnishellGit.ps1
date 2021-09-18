@@ -2,7 +2,7 @@ function Get-OmnishellGit {
     $fileTypes = @{}
     $result = ""
     if (git rev-parse --is-inside-work-tree 2>$null) {
-        $branch = git branch --show-current 2>$null
+        $branch = Get-BranchName
         $result += $branch
         if([Environment]::OSVersion.Platform -ne "UNIX"){
             $status = git status -s 2>$null
