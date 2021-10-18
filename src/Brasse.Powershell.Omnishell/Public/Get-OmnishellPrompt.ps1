@@ -9,10 +9,10 @@ function Get-OmnishellPrompt {
         if (-not ($Global:Omnishell.Disabled."$($_.name)")) {
             try {
                 $expressionSize = 0;
-                $expressionsParams = foreach ($expression in $_.expressions) {
+                [Array] $expressionsParams = foreach ($expression in $_.expressions) {
                     $prompt = (Invoke-Expression $expression.expression)
                     $expressionSize += $prompt.Length
-                    @{
+                    [PSCustomObject] @{
                         BackgroundColor = $expression.backgroundColor
                         ForegroundColor = $expression.foregroundColor
                         Prompt          = $prompt
@@ -25,11 +25,9 @@ function Get-OmnishellPrompt {
                 else {
                     $totalSize += $expressionSize
                 }
-                foreach ($params in $expressionsParams) {
-                    Write-OmnishellPrompt @params
-                }
+                $expressionsParams | Write-OmnishellPrompt
                 if ($null -ne $_.return) {
-                    $_.return
+                    Invoke-Expression $_.return
                 }
             }
             catch {
