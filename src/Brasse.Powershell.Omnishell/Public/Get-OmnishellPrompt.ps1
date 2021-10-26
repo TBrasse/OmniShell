@@ -4,34 +4,19 @@ function Get-OmnishellPrompt {
     )
     $consoleSize = $Host.UI.RawUI.WindowSize.Width
     $config = Get-Content $ConfigFile | ConvertFrom-Json -AsHashtable
-    $profileName = Invoke-Expression $config.switch
+    $profileName = (Invoke-Expression $config.switch -ErrorAction SilentlyContinue) ?? "default"
     $config.profiles[$profileName] | ForEach-Object {
         if (-not ($Global:Omnishell.Disabled."$($_.name)")) {
-            try {
-                $expressionSize = 0;
-                [Array] $expressionsParams = foreach ($expression in $_.expressions) {
-                    $prompt = (Invoke-Expression $expression.expression)
-                    $expressionSize += $prompt.Length
-                    [PSCustomObject] @{
-                        BackgroundColor = $expression.backgroundColor
-                        ForegroundColor = $expression.foregroundColor
-                        Prompt          = $prompt
-                        NewLine         = [bool]$expression.newline
-                    }
-                }
-                if ($totalSize + $expressionSize -gt $consoleSize) {
-                    Write-OmnishellPrompt -NewLine $true
-                }
-                else {
-                    $totalSize += $expressionSize
-                }
-                $expressionsParams | Write-OmnishellPrompt
-                if ($null -ne $_.return) {
-                    Invoke-Expression $_.return
-                }
+            $segement = Resolve-Expressions -Expressions $_.expressions
+            if ($totalSize + $segement.Length -gt $consoleSize) {
+                Write-OmnishellPrompt -NewLine $true
             }
-            catch {
-                Write-Error "segment $($_.name) thrown error $_"
+            else {
+                $totalSize += $segement.Length
+            }
+            $segement.Expressions | Write-OmnishellPrompt
+            if ($null -ne $_.return) {
+                Invoke-Expression $_.return
             }
         }
     }

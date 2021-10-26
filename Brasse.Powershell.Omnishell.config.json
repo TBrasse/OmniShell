@@ -1,5 +1,5 @@
 {
-    "switch": "switch([Environment]::OSVersion.Platform){ 'Win32NT'{'default'} 'Unix'{'Unix'}}",
+    "switch": "switch([Environment]::OSVersion.Platform){'Unix'{'Unix'}}",
     "profiles": {
         "default": [
             {
