@@ -4,10 +4,10 @@ function Get-OmnishellPrompt {
     )
     $consoleSize = $Host.UI.RawUI.WindowSize.Width
     $config = Get-Content $ConfigFile | ConvertFrom-Json -AsHashtable
-    $profileName = (Invoke-Expression $config.switch -ErrorAction SilentlyContinue) ?? "default"
+    $profileName = (Invoke-Expression $config.switch -ErrorAction SilentlyContinue)
     $config.profiles[$profileName] | ForEach-Object {
         if (-not ($Global:Omnishell.Disabled."$($_.name)")) {
-            $segement = Resolve-Expressions -Expressions $_.expressions
+            $segement = Resolve-Segment -Segment $_
             if ($totalSize + $segement.Length -gt $consoleSize) {
                 Write-OmnishellPrompt -NewLine $true
             }

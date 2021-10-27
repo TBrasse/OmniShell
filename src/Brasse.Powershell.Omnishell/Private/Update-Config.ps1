@@ -25,8 +25,5 @@ function Update-Config {
             }
             $newConfig | ConvertTo-Json -Depth 50 | Set-Content -Path $Config
         }
-        # {$currentVersion -lt "0.1.1"}{
-        # update to future version
-        # }
     }
 }
