@@ -42,7 +42,7 @@
         },
         {
           "name": "git",
-          "prefix": " ",
+          "prefix": "",
           "suffix": "",
           "foregroundColor": "Black",
           "backgroundColor": "DarkGreen",
@@ -54,7 +54,7 @@
               "expression": "if($result) { $title = Split-Path -LeafBase (git remote get-url origin) }"
             },
             {
-              "expression": "if($result) {\"$result\"}"
+              "expression": "if($result) {\" $result\"} else {\" \"}"
             }
           ]
         },
