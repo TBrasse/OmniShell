@@ -1,6 +1,8 @@
 #### Todo List
 - [ ] Add json schema
-- [ ] Add global color for segment
-- [ ] Add if for segment
+- [X] Add global color for segment
+- [X] Add if for segment
 - [ ] Fix installer
 - [ ] Add documentation
+- [X] Add Global (in Memory) segments
+- [X] Add Defining Order for segments

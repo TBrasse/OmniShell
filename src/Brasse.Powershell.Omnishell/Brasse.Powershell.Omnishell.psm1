@@ -26,8 +26,8 @@ if ($null -eq $Global:Omnishell.Segments){
 if(-not (Test-Path -Path $Global:Omnishell.AppDir)){
     New-Item -Path $Global:Omnishell.AppDir -ItemType Directory
 }
-$public = Get-ChildItem -Path (Join-Path $PSScriptRoot "Public" "*.ps1")
-$private = Get-ChildItem -Path (Join-Path $PSScriptRoot "Private" "*.ps1")
+$public = Get-ChildItem -Path (Join-Path $PSScriptRoot "Public") -Exclude "*.tests.ps1" -Recurse -File
+$private = Get-ChildItem -Path (Join-Path $PSScriptRoot "Private") -Exclude "*.tests.ps1" -Recurse -File
 
 @($public + $private ) | ForEach-Object {
     Import-Module $_.FullName

@@ -2,7 +2,7 @@ function Write-OmnishellPrompt {
     [CmdletBinding()]
     param(
         [Parameter(ValueFromPipelineByPropertyName)]
-        [string] $Prompt,
+        [string] $Expression,
         [Parameter(ValueFromPipelineByPropertyName)]
         [string] $ForegroundColor,
         [Parameter(ValueFromPipelineByPropertyName)]
@@ -12,7 +12,7 @@ function Write-OmnishellPrompt {
     )
     process {
         $param = @{
-            Object = $Prompt
+            Object = $Expression
         }
         if ($ForegroundColor) {
             $param.add( "ForegroundColor", $ForegroundColor )

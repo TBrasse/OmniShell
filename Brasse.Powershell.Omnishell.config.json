@@ -1,113 +1,24 @@
 {
-    "version": "0.2.1",
-    "switch": "switch([Environment]::OSVersion.Platform){ 'Win32NT'{'default'} 'Unix'{'Unix'}}",
-    "profiles": {
-      "default": [
-        {
-          "name": "date",
-          "expressions": [
-            {
-              "backgroundColor": "Black",
-              "expression": "Get-Date -Format 'HH:mm:ss'",
-              "foregroundColor": "DarkGray"
-            }
-          ]
-        },
-        {
-          "name": "platform",
-          "prefix": "",
-          "suffix": "",
-          "foregroundColor": "Black",
-          "backgroundColor": "Blue",
-          "expressions": [
-            {
-              "expression": "''"
-            }
-          ]
-        },
-        {
-          "name": "azcontext",
-          "prefix": "",
-          "suffix": "",
-          "foregroundColor": "Black",
-          "backgroundColor": "DarkGray",
-          "expressions": [
-            {
-              "expression": "$result = (Get-AzContext).Subscription.Name"
-            },
-            {
-              "expression": "if($result){\" $result\"} else {' '}"
-            }
-          ]
-        },
-        {
-          "name": "git",
-          "prefix": "",
-          "suffix": "",
-          "foregroundColor": "Black",
-          "backgroundColor": "DarkGreen",
-          "expressions": [
-            {
-              "expression": "$result = Get-OmnishellGit"
-            },
-            {
-              "expression": "if($result) { $title = Split-Path -LeafBase (git remote get-url origin) }"
-            },
-            {
-              "expression": "if($result) {\" $result\"} else {\" \"}"
-            }
-          ]
-        },
-        {
-          "name": "vpnTest",
-          "prefix": "",
-          "suffix": "",
-          "foregroundColor": "Black",
-          "backgroundColor": "DarkYellow",
-          "expressions": [
-            {
-              "expression": "$result = Resolve-DnsName google.com -Type A -DnsOnly -QuickTimeout"
-            },
-            {
-              "expression": "if($result) {' '} else {' '}"
-            }
-          ]
-        },
-        {
-          "name": "newLine",
-          "expressions": [
-            {
-              "expression": " ",
-              "newline": true
-            }
-          ]
-        },
-        {
-          "name": "path",
-          "foregroundColor": "Gray",
-          "backgroundColor": "Black",
-          "expressions": [
-            {
-              "expression": "$executionContext.SessionState.Path.CurrentLocation"
-            },
-            {
-              "expression": "$Host.UI.RawUI.WindowTitle = if($title) {$title} else {$executionContext.SessionState.Path.CurrentLocation}"
-            }
-          ]
-        },
-        {
-          "name": "newLine",
-          "expressions": [
-            {
-              "expression": " ",
-              "newline": true
-            }
-          ]
-        },
-        {
-          "name": "prompt",
-          "return": "if($PSDebugContext) { '[DBG]> ' } else { '> ' }"
-        }
-      ]
+  "version": "0.3.0",
+  "switch": "switch([Environment]::OSVersion.Platform){ 'Win32NT'{'default'} 'Unix'{'Unix'}}",
+  "profiles": {
+    "default": {
+      "order" : [
+        "date", "platform", "azcontext", "git", "vpnTest",
+        "path",
+        "prompt"
+      ],
+      "segments": {
+      }
+    },
+    "Unix": {
+      "order" : [
+        "date", "platform", "azcontext", "git", "vpnTest",
+        "path",
+        "prompt"
+      ],
+      "segments": {
+      }
     }
   }
+}
