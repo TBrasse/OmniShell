@@ -5,7 +5,9 @@ function Get-RecordedSegments {
     $recordedSegments += Get-AzContextSegment
     $recordedSegments += Get-GitSegment
     $recordedSegments += Get-VpnTestSegment
+    $recordedSegments += Get-LinuxVpnTestSegment
     $recordedSegments += Get-PathSegment
     $recordedSegments += Get-PromptSegment
-    $recordedSegments 
+    $recordedSegments += Get-NewlineSegment
+    $recordedSegments
 }

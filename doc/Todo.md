@@ -6,3 +6,4 @@
 - [ ] Add documentation
 - [X] Add Global (in Memory) segments
 - [X] Add Defining Order for segments
+- [ ] Implement Testing for custom segments

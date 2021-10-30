@@ -4,8 +4,8 @@
   "profiles": {
     "default": {
       "order" : [
-        "date", "platform", "azcontext", "git", "vpnTest",
-        "path",
+        "date", "platform", "azcontext", "git", "vpnTest", "newLine",
+        "path", "newLine",
         "prompt"
       ],
       "segments": {
@@ -13,8 +13,8 @@
     },
     "Unix": {
       "order" : [
-        "date", "platform", "azcontext", "git", "vpnTest",
-        "path",
+        "date", "platform", "azcontext", "git", "linuxVpnTest", "newLine",
+        "path", "newLine",
         "prompt"
       ],
       "segments": {

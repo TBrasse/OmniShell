@@ -7,7 +7,7 @@ function Get-PlatformSegment {
             "backgroundColor" = "Blue"
             "expressions"     = @(
                 @{
-                    "expression" = "''"
+                    "expression" = "switch([Environment]::OSVersion.Platform){ 'Win32NT'{''} 'Unix'{' '} 'MacOSX'{' '}}"
                 }
             )
         }

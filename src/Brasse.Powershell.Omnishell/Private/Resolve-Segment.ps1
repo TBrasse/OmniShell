@@ -7,7 +7,7 @@ function Resolve-Segment {
         $resolved = [System.Collections.ArrayList]::new();
         if ($Segment.prefix) {
             $resolved += [PSCustomObject] @{
-                BackgroundColor = $Segment.foregroundColor
+                # BackgroundColor = $Segment.foregroundColor
                 ForegroundColor = $Segment.backgroundColor
                 Expression      = $Segment.prefix
             }
@@ -35,7 +35,7 @@ function Resolve-Segment {
             }
         }
         $resolved += [PSCustomObject] @{
-            BackgroundColor = $Segment.foregroundColor
+            # BackgroundColor = $Segment.foregroundColor
             ForegroundColor = $Segment.backgroundColor
             Expression      = $Segment.suffix
             NewLine         = ($Segment.newline ?? $false)
@@ -44,6 +44,7 @@ function Resolve-Segment {
     }
     catch {
         Write-Error "segment $($_.name) thrown error $_"
+        return @{}
     }
     @{
         "Name"        = $Segment.name

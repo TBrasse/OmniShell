@@ -3,7 +3,6 @@ function Get-AzContextSegment {
         "azcontext" = @{
             "prefix"          = ""
             "suffix"          = ""
-            "foregroundColor" = "Black"
             "backgroundColor" = "DarkGray"
             "expressions"     = @(
                 @{

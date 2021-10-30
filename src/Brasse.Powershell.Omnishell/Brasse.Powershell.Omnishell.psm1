@@ -23,6 +23,9 @@ if ($null -eq $Global:Omnishell.Disabled){
 if ($null -eq $Global:Omnishell.Segments){
     $Global:Omnishell.Segments = @()
 }
+if ($null -eq $Global:Omnishell.CustomSegments){
+    $Global:Omnishell.CustomSegments = @{}
+}
 if(-not (Test-Path -Path $Global:Omnishell.AppDir)){
     New-Item -Path $Global:Omnishell.AppDir -ItemType Directory
 }

@@ -1,16 +1,16 @@
-function Get-VpnTestSegment {
+function Get-LinuxVpnTestSegment {
     @{
-        "vpnTest" = @{
+        "linuxVpnTest" = @{
             "prefix"          = ""
             "suffix"          = ""
             "foregroundColor" = "Black"
             "backgroundColor" = "DarkYellow"
             "expressions"     = @(
                 @{
-                    "expression" = '$result = Resolve-DnsName google.com -Type A -DnsOnly -QuickTimeout -ErrorAction SilentlyContinue'
+                    "expression" = '$result = -not ((host google.com) -match ".*not found.*")'
                 },
                 @{
-                    "if" = '$null -ne $result'
+                    "if" = '$result'
                 },
                 @{
                     "expression" = 'if($result) {" "} else {" "}'

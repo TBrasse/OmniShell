@@ -7,7 +7,10 @@ function Get-OmnishellPrompt {
     $config = Get-Content $ConfigFile | ConvertFrom-Json -AsHashtable
     $profileName = (Invoke-Expression $config.switch -ErrorAction SilentlyContinue)
 
+    $Global:Omnishell.loadedProfile = $config.profiles[$profileName]
+
     $recordedSegments = Get-RecordedSegments
+    $recordedSegments += Get-CustomSegments
     foreach ($key in  $config.profiles[$profileName].segments.Keys) {
         $recordedSegments.$key = $config.profiles[$profileName].segments[$key]
     }

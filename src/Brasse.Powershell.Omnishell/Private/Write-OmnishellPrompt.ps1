@@ -14,10 +14,10 @@ function Write-OmnishellPrompt {
         $param = @{
             Object = $Expression
         }
-        if ($ForegroundColor) {
+        if (-not [string]::IsNullOrWhiteSpace($ForegroundColor)) {
             $param.add( "ForegroundColor", $ForegroundColor )
         }
-        if ($BackgroundColor) {
+        if (-not [string]::IsNullOrWhiteSpace($BackgroundColor)) {
             $param.add( "BackgroundColor", $BackgroundColor )
         }
         if (-not $NewLine) {
