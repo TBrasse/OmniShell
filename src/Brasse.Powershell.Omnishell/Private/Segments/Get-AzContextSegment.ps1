@@ -3,6 +3,7 @@ function Get-AzContextSegment {
         "azcontext" = @{
             "prefix"          = ""
             "suffix"          = ""
+            "foregroundColor" = "Black"
             "backgroundColor" = "DarkGray"
             "expressions"     = @(
                 @{
@@ -12,7 +13,7 @@ function Get-AzContextSegment {
                     "if" = '$null -ne $result'
                 },
                 @{
-                    "expression" = 'if($result){\" $result\"} else {" "}'
+                    "expression" = "if(`$result){`" `$result`"} else {`" `"}"
                 }
             )
         }
