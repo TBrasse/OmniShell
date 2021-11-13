@@ -1,7 +1,6 @@
 function Get-PromptSegment {
     @{
-        "prompt" = @{
-            "prompt" = "if(`$PSDebugContext) { '[DBG]> ' } else { '> ' }"
-        }
+        "name"   = "prompt"
+        "prompt" = "if(`$PSDebugContext) { '[DBG]> ' } else { '> ' }"
     }
 }

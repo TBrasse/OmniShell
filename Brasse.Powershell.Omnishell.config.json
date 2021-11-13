@@ -1,5 +1,5 @@
 {
-  "version": "0.3.0",
+  "version": "0.4.0",
   "switch": "switch([Environment]::OSVersion.Platform){ 'Win32NT'{'default'} 'Unix'{'Unix'}}",
   "profiles": {
     "default": {
@@ -8,6 +8,18 @@
         "path", "newLine",
         "prompt"
       ],
+      "styles" :{
+        "date"      :{ "format" : "clear", "foreground" : "DarkGray" },
+        "platform"  :{ "format" : "diamond", "foreground" : "Black", "background": "DarkBlue"   },
+        "azcontext" :{ "format" : "diamond", "foreground" : "Black", "background": "DarkGray"   },
+        "git"       :{ "format" : "diamond", "foreground" : "Black", "background": "DarkGreen"  },
+        "vpnTest"   :{ "format" : "diamond", "foreground" : "Black", "background": "DarkYellow" },
+        "newLine"   :{ "format" : "clear" },
+        "path"      :{ "format" : "clear", "foreground" : "White" },
+        "prompt"    :{ "format" : "clear", "foreground" : "White" }
+      },
+      "formats": {
+      },
       "segments": {
       }
     },

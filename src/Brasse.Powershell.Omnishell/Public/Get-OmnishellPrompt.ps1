@@ -2,32 +2,25 @@ function Get-OmnishellPrompt {
     param(
         [string] $ConfigFile = $Global:Omnishell.Config
     )
-    $Global:Omnishell.Segments = [System.Collections.ArrayList]::new()
     $consoleSize = $Host.UI.RawUI.WindowSize.Width
     $config = Get-Content $ConfigFile | ConvertFrom-Json -AsHashtable
     $profileName = (Invoke-Expression $config.switch -ErrorAction SilentlyContinue)
 
-    $Global:Omnishell.loadedProfile = $config.profiles[$profileName]
+    $profile = $config.profiles[$profileName]
+    $Global:Omnishell.loadedProfile = $profile
 
     $recordedSegments = Get-RecordedSegments
     $recordedSegments += Get-CustomSegments
-    foreach ($key in  $config.profiles[$profileName].segments.Keys) {
-        $recordedSegments.$key = $config.profiles[$profileName].segments[$key]
+
+    #ReadSegments
+    foreach ($key in  $profile.segments.Keys) {
+        $recordedSegments.$key = $profile.segments[$key]
     }
-    $segments = foreach ($key in $config.profiles[$profileName].order) {
-        Resolve-Segment -Segment $recordedSegments[$key]
+    #ResolveSegments
+    $segments = foreach ($key in $profile.order) {
+        Resolve-Segment -Segment $recordedSegments[$key] -Style ($profile.styles[$key])
     }
 
-    $segments | ForEach-Object {
-        if ($totalSize + $_.Length -gt $consoleSize) {
-            Write-OmnishellPrompt -NewLine $true
-        }
-        else {
-            $totalSize += $_.Length
-        }
-        $_.Expressions | Write-OmnishellPrompt
-        if ($null -ne $_.Prompt) {
-            Invoke-Expression $_.Prompt
-        }
-    }
+    #PrintSegments
+    $segments | Write-Segment
 }

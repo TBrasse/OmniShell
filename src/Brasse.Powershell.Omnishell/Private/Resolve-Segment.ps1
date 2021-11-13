@@ -1,55 +1,34 @@
 function Resolve-Segment {
     param(
-        [hashtable] $Segment
+        [Parameter(ValueFromPipeline)]
+        [hashtable] $Segment,
+        [hashtable] $Style
     )
-    try {
-        $expressionSize = 0;
-        $resolved = [System.Collections.ArrayList]::new();
-        if ($Segment.prefix) {
-            $resolved += [PSCustomObject] @{
-                # BackgroundColor = $Segment.foregroundColor
-                ForegroundColor = $Segment.backgroundColor
-                Expression      = $Segment.prefix
+    process {
+        try {
+            $resolved = ""
+            foreach ($expression in $Segment.expressions.expression) {
+                $resolved += (Invoke-Expression $expression)
             }
-            $expressionSize += $Segment.prefix.length
-        }
-        foreach ($expression in $Segment.expressions) {
-            switch ($expression) {
-                { $_.expression } {
-                    $resolvedExpression = (Invoke-Expression $expression.expression)
-                    $expressionSize += $resolvedExpression.Length
-                    $resolved += [PSCustomObject] @{
-                        BackgroundColor = $expression.backgroundColor ?? $Segment.backgroundColor
-                        ForegroundColor = $expression.foregroundColor ?? $Segment.foregroundColor
-                        Expression      = $resolvedExpression
-                        NewLine         = [bool]($expression.newline ?? $false)
-                    }
-                    break
-                }
-                { $_.if } {
-                    if ($false -eq (Invoke-Expression $expression.if)) {
-                        return @{}
-                    }
+            $shouldRender = $true
+            foreach ($if in $Segment.expressions.if) {
+                if ($false -eq (Invoke-Expression $if)) {
+                    $shouldRender = $false
                     break
                 }
             }
         }
-        $resolved += [PSCustomObject] @{
-            # BackgroundColor = $Segment.foregroundColor
-            ForegroundColor = $Segment.backgroundColor
-            Expression      = $Segment.suffix
-            NewLine         = ($Segment.newline ?? $false)
+        catch {
+            Write-Error "segment $($Segment.name) thrown error $_"
+            return @{}
         }
-        $expressionSize += $Segment.suffix.length
-    }
-    catch {
-        Write-Error "segment $($_.name) thrown error $_"
-        return @{}
-    }
-    @{
-        "Name"        = $Segment.name
-        "Length"      = $expressionSize
-        "Expressions" = $resolved
-        "Prompt"      = $Segment.prompt
+        $format = Get-Format @Style -Value $resolved
+        [PSCustomObject]@{
+            "Name"   = $Segment.Name
+            "Length" = $format.prefix.Length + $format.segment.Length + $format.segment.Lenght
+            "Format" = $format
+            "Prompt" = $Segment.prompt
+            "If"     = $shouldRender
+        }
     }
 }

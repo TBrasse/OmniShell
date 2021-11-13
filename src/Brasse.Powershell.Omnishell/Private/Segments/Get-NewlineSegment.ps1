@@ -1,12 +1,10 @@
 function Get-NewlineSegment {
     @{
-        "newLine" = @{
-            "expressions" = @(
-                @{
-                    "expression" = ''
-                }
-            )
-            "newline"     = $true
-        }
+        "name"        = "newLine"
+        "expressions" = @(
+            @{
+                "expression" = "'`n'"
+            }
+        )
     }
 }
