@@ -1,8 +1,7 @@
 function Resolve-Segment {
     param(
         [Parameter(ValueFromPipeline)]
-        [hashtable] $Segment,
-        [hashtable] $Style
+        [hashtable] $Segment
     )
     process {
         try {
@@ -22,13 +21,12 @@ function Resolve-Segment {
             Write-Error "segment $($Segment.name) thrown error $_"
             return @{}
         }
-        $format = Get-Format @Style -Value $resolved
         [PSCustomObject]@{
-            "Name"   = $Segment.Name
-            "Length" = $format.prefix.Length + $format.segment.Length + $format.segment.Lenght
-            "Format" = $format
-            "Prompt" = $Segment.prompt
-            "If"     = $shouldRender
+            "Name"       = $Segment.Name
+            "Expression" = $resolved
+            "Length"     = $resolved.Length
+            "Prompt"     = $Segment.prompt
+            "If"         = $shouldRender
         }
     }
 }
