@@ -12,7 +12,7 @@ function Get-GitSegment {
                 "expression" = "if(`$result) { `$title = Split-Path -LeafBase (git remote get-url origin) }"
             },
             @{
-                "expression" = "if(`$result) { `" `$result`" } else { `" `" }"
+                "expression" = "if(`$result) { `" `$result`" }"
             }
         )
     }
