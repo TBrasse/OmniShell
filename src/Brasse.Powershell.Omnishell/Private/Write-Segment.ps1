@@ -4,13 +4,13 @@ function Write-Segment {
         [PSCustomObject] $Segment
     )
     process {
-        if ($Segment.Format.segment.value.Length -gt 0) {
+        if ($Segment.format.prefix.Count -ne 0 -and $Segment.Format.segment.value.Length -gt 0) {
             [PSCustomObject] $Segment.format.prefix | Write-OmnishellPrompt
         }
 
         [PSCustomObject] $Segment.format.segment | Write-OmnishellPrompt
 
-        if ($Segment.Format.segment.value.Length -gt 0) {
+        if ($Segment.format.prefix.Count -ne 0 -and $Segment.Format.segment.value.Length -gt 0) {
             [PSCustomObject] $Segment.format.suffix | Write-OmnishellPrompt
         }
 
