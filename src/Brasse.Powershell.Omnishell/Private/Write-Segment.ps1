@@ -10,7 +10,7 @@ function Write-Segment {
 
         [PSCustomObject] $Segment.format.segment | Write-OmnishellPrompt
 
-        if ($Segment.format.prefix.Count -ne 0 -and $Segment.Format.segment.value.Length -gt 0) {
+        if ($Segment.format.suffix.Count -ne 0 -and $Segment.Format.segment.value.Length -gt 0) {
             [PSCustomObject] $Segment.format.suffix | Write-OmnishellPrompt
         }
 

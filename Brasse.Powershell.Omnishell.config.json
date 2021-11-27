@@ -10,10 +10,10 @@
       ],
       "styles" :{
         "date"      :{ "format" : "clear", "foreground" : "DarkGray" },
-        "platform"  :{ "format" : "diamond", "foreground" : "Black", "background": "DarkBlue"   },
-        "azcontext" :{ "format" : "diamond", "foreground" : "Black", "background": "DarkGray"   },
-        "git"       :{ "format" : "diamond", "foreground" : "Black", "background": "DarkGreen"  },
-        "vpnTest"   :{ "format" : "diamond", "foreground" : "Black", "background": "DarkYellow" },
+        "platform"  :{ "format" : "ribbon", "foreground" : "Black", "background": "DarkBlue" },
+        "azcontext" :{ "format" : "ribbon", "foreground" : "Black", "background": "DarkGray" },
+        "git"       :{ "format" : "ribbon", "foreground" : "Black", "background": "DarkGreen" },
+        "vpnTest"   :{ "format" : "ribbon", "foreground" : "Black", "background": "Red" },
         "newLine"   :{ "format" : "clear" },
         "path"      :{ "format" : "clear", "foreground" : "White" },
         "prompt"    :{ "format" : "clear", "foreground" : "White" }

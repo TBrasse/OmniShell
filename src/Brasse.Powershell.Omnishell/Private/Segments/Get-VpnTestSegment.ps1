@@ -6,7 +6,7 @@ function Get-VpnTestSegment {
                 "expression" = '$result = Resolve-DnsName google.com -Type A -DnsOnly -QuickTimeout -ErrorAction SilentlyContinue'
             },
             @{
-                "expression" = 'if($result) {" "} else {" "}'
+                "expression" = 'if(-not $result) {" "}'
             }
         )
     }
