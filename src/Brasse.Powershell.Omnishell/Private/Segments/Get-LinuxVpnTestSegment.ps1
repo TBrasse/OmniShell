@@ -6,7 +6,7 @@ function Get-LinuxVpnTestSegment {
                 "expression" = "`$result = -not ((host google.com) -match `".*not found.*`")"
             },
             @{
-                "expression" = "if(`$result) {`" `"} else {`" `"}"
+                "expression" = "if(`$result) {`"`"} else {`"`"}"
             }
         )
     }
