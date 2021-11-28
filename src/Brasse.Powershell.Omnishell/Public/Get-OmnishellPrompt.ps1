@@ -4,35 +4,29 @@ function Get-OmnishellPrompt {
     )
     $consoleSize = $Host.UI.RawUI.WindowSize.Width
     $config = Get-Content $ConfigFile | ConvertFrom-Json -AsHashtable
-    $profileName = Invoke-Expression $config.switch
-    $config.profiles[$profileName] | ForEach-Object {
-        if (-not ($Global:Omnishell.Disabled."$($_.name)")) {
-            try {
-                $expressionSize = 0;
-                [Array] $expressionsParams = foreach ($expression in $_.expressions) {
-                    $prompt = (Invoke-Expression $expression.expression)
-                    $expressionSize += $prompt.Length
-                    [PSCustomObject] @{
-                        BackgroundColor = $expression.backgroundColor
-                        ForegroundColor = $expression.foregroundColor
-                        Prompt          = $prompt
-                        NewLine         = [bool]$expression.newline
-                    }
-                }
-                if ($totalSize + $expressionSize -gt $consoleSize) {
-                    Write-OmnishellPrompt -NewLine $true
-                }
-                else {
-                    $totalSize += $expressionSize
-                }
-                $expressionsParams | Write-OmnishellPrompt
-                if ($null -ne $_.return) {
-                    Invoke-Expression $_.return
-                }
-            }
-            catch {
-                Write-Error "segment $($_.name) thrown error $_"
-            }
-        }
+    $profileName = (Invoke-Expression $config.switch -ErrorAction SilentlyContinue)
+
+    $configProfile = $config.profiles[$profileName]
+    $Global:Omnishell.loadedProfile = $configProfile
+
+    $recordedSegments = Get-RecordedSegments
+    $recordedSegments += Get-CustomSegments
+
+    #ReadSegments
+    foreach ($key in  $configProfile.segments.Keys) {
+        $recordedSegments.$key = $configProfile.segments[$key]
     }
+    #ResolveSegments
+    $segments = foreach ($key in $configProfile.order) {
+        $segment = Resolve-Segment -Segment $recordedSegments[$key]
+        if($segment.Expression.Length -eq 0 -and -not $segment.prompt){
+            continue
+        }
+        $segment
+    }
+
+    $formatedSegments = Format-Segments -Segments $segments -Styles $configProfile.styles
+
+    #PrintSegments
+    $formatedSegments | Write-Segment
 }

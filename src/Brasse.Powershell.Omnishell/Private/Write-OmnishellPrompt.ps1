@@ -2,27 +2,22 @@ function Write-OmnishellPrompt {
     [CmdletBinding()]
     param(
         [Parameter(ValueFromPipelineByPropertyName)]
-        [string] $Prompt,
+        [string] $Value,
         [Parameter(ValueFromPipelineByPropertyName)]
-        [string] $ForegroundColor,
+        [string] $Foreground,
         [Parameter(ValueFromPipelineByPropertyName)]
-        [string] $BackgroundColor,
-        [Parameter(ValueFromPipelineByPropertyName)]
-        [bool] $NewLine
+        [string] $Background
     )
     process {
         $param = @{
-            Object = $Prompt
+            Object = $Value
         }
-        if ($ForegroundColor) {
-            $param.add( "ForegroundColor", $ForegroundColor )
+        if (-not [string]::IsNullOrWhiteSpace($Foreground)) {
+            $param.add( "Foreground", $Foreground )
         }
-        if ($BackgroundColor) {
-            $param.add( "BackgroundColor", $BackgroundColor )
+        if (-not [string]::IsNullOrWhiteSpace($Background)) {
+            $param.add( "Background", $Background )
         }
-        if (-not $NewLine) {
-            $param.add( "NoNewLine", !$NewLine )
-        }
-        Write-Host @param
+        Write-Host @param -NoNewline
     }
 }
