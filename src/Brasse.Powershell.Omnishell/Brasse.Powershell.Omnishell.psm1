@@ -17,23 +17,27 @@ if ($null -eq $Global:Omnishell.AppDir) {
 if ($null -eq $Global:Omnishell.Config) {
     $Global:Omnishell.Config = Join-Path $Global:Omnishell.AppDir "config.json"
 }
-if ($null -eq $Global:Omnishell.Disabled){
+if ($null -eq $Global:Omnishell.Disabled) {
     $Global:Omnishell.Disabled = @{}
 }
-if ($null -eq $Global:Omnishell.Segments){
+if ($null -eq $Global:Omnishell.Segments) {
     $Global:Omnishell.Segments = @{}
 }
-if ($null -eq $Global:Omnishell.CustomSegments){
+if ($null -eq $Global:Omnishell.CustomSegments) {
     $Global:Omnishell.CustomSegments = @{}
 }
-if(-not (Test-Path -Path $Global:Omnishell.AppDir)){
+if (-not (Test-Path -Path $Global:Omnishell.AppDir)) {
     New-Item -Path $Global:Omnishell.AppDir -ItemType Directory
 }
-$public = Get-ChildItem -Path (Join-Path $PSScriptRoot "Public") -Exclude "*.tests.ps1" -Recurse -File
-$private = Get-ChildItem -Path (Join-Path $PSScriptRoot "Private") -Exclude "*.tests.ps1" -Recurse -File
+$public = (Get-ChildItem -Path (Join-Path $PSScriptRoot "Public") -Exclude "*.tests.ps1" -Recurse -File).FullName
+$private = (Get-ChildItem -Path (Join-Path $PSScriptRoot "Private") -Exclude "*.tests.ps1" -Recurse -File).FullName
 
-@($public + $private ) | ForEach-Object {
-    Import-Module $_.FullName
+@($private ) | ForEach-Object {
+    Import-Module $_
+}
+
+@($public) | ForEach-Object {
+    Import-Module $_
 }
 
 if (-not (Test-Path -Path $Global:Omnishell.Config)) {
@@ -58,5 +62,5 @@ function prompt {
     Get-OmnishellPrompt -ConfigFile $Global:Omnishell.Config
 }
 
-Export-ModuleMember -Function $public.BaseName
-Export-ModuleMember -Function prompt
+Export-ModuleMember -Cmdlet $public.BaseName
+Export-ModuleMember -Function "prompt"

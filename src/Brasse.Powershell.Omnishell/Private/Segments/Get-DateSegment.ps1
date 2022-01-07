@@ -4,7 +4,6 @@ function Get-DateSegment {
         "expressions" = @(
             @{
                 "expression"      = "Get-Date -Format `"HH:mm:ss`""
-                "foregroundColor" = "DarkGray"
             }
         )
     }
