@@ -1,7 +1,7 @@
 ﻿namespace Omnishell.Core
 {
-    internal interface IOmnishell
-    {
-        public string GetTest();
-    }
+	internal interface IOmnishell
+	{
+		void PrintPrompt();
+	}
 }

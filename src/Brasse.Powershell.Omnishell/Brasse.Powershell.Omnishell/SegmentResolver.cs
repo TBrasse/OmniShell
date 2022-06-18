@@ -16,7 +16,7 @@ namespace Omnishell.Core
             this.styleProvider = styleProvider;
         }
 
-        public FormatedStyle Resolve(BaseSegment segment)
+        public FormatedStyle Resolve(IBaseSegment segment)
         {
             IEnumerable<string> result = shell.Execute(segment);
             var segmentStyle = styleProvider.GetStyle(segment);

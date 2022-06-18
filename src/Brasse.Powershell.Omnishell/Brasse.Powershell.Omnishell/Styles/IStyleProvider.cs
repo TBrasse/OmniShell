@@ -2,8 +2,8 @@
 {
     internal interface IStyleProvider
     {
-        Style GetStyle(BaseSegment segment);
-        Style GetPreviousStyle(BaseSegment segment);
-        Style GetNextStyle(BaseSegment segment);
+        Style GetStyle(IBaseSegment segment);
+        Style GetPreviousStyle(IBaseSegment segment);
+        Style GetNextStyle(IBaseSegment segment);
     }
 }

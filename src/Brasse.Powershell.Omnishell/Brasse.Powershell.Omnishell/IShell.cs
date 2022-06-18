@@ -6,6 +6,6 @@ namespace Omnishell.Core
     {
         public IEnumerable<string> Execute(string expression);
         public IEnumerable<string> Execute(string[] expressions);
-        public IEnumerable<string> Execute(BaseSegment segment);
+        public IEnumerable<string> Execute(IBaseSegment segment);
     }
 }

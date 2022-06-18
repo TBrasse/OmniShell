@@ -29,7 +29,7 @@ namespace Omnishell.Core
             }
         }
 
-        public IEnumerable<string> Execute(BaseSegment segment)
+        public IEnumerable<string> Execute(IBaseSegment segment)
         {
             var powershell = PowerShell.Create();
             foreach (string expression in segment.Expressions)

@@ -5,6 +5,6 @@ namespace Omnishell.Core
 {
     internal interface ISegmentResolver
     {
-        public FormatedStyle Resolve(BaseSegment segment);
+        public FormatedStyle Resolve(IBaseSegment segment);
     }
 }
