@@ -10,7 +10,6 @@ namespace Omnishell.Core
 		protected override void ProcessRecord()
 		{
 			omnishell.PrintPrompt();
-			WriteObject("");
 		}
 	}
 }

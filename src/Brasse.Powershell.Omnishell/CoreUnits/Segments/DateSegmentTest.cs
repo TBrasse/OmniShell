@@ -1,6 +1,8 @@
+using Moq;
 using NUnit.Framework;
 using Omnishell.Core.Segments;
 using System;
+using System.Collections.Generic;
 using System.Globalization;
 
 namespace Omnishell.Core.Units
@@ -14,7 +16,10 @@ namespace Omnishell.Core.Units
 
             IShell powershell = new Powershell();
             IFormatProvider formatProvider = new FormatProvider();
-            IStyleProvider styleProvider = new StyleProvider(new Profile());
+            IStyleProvider styleProvider = new StyleProvider(
+                CreateProfile(),
+                new Powershell()
+            );
 
             var resolver = new SegmentResolver(powershell, formatProvider, styleProvider);
 
@@ -29,6 +34,25 @@ namespace Omnishell.Core.Units
                 ),
                 "ResolvedExpression is not a valid date format"
             );
+        }
+
+        private IConfigurationReader CreateProfile()
+        {
+            Mock<IConfigurationReader> configReaderMock = new Mock<IConfigurationReader>();
+            configReaderMock.Setup(x => x.Read()).Returns
+            (
+                new Configuration
+                {
+                    Switch = "profile",
+                    Profiles = new Dictionary<string, Profile>
+                    {
+                        {
+                            "profile", new Profile()
+                        }
+                    }
+                }
+            );
+            return configReaderMock.Object;
         }
     }
 }

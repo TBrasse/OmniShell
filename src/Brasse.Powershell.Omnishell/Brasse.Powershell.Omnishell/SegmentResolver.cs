@@ -9,7 +9,12 @@ namespace Omnishell.Core
         private readonly IFormatProvider formatProvider;
         private readonly IStyleProvider styleProvider;
 
-        public SegmentResolver(IShell shell, IFormatProvider formatProvider, IStyleProvider styleProvider)
+        public SegmentResolver
+        (
+            IShell shell,
+            IFormatProvider formatProvider,
+            IStyleProvider styleProvider
+        )
         {
             this.shell = shell;
             this.formatProvider = formatProvider;
@@ -19,15 +24,16 @@ namespace Omnishell.Core
         public FormatedStyle Resolve(IBaseSegment segment)
         {
             IEnumerable<string> result = shell.Execute(segment);
-            var segmentStyle = styleProvider.GetStyle(segment);
+            string resultString = string.Join("", result);
             var previousStyle = styleProvider.GetPreviousStyle(segment);
+            var segmentStyle = styleProvider.GetStyle(segment);
             var nextStyle = styleProvider.GetNextStyle(segment);
             AbstractFormater formater = formatProvider.GetFormater(segmentStyle.FormatType);
             return formater.Format(previousStyle, nextStyle, new ConsoleString()
             {
                 Background = segmentStyle.Background,
                 Foreground = segmentStyle.Foreground,
-                String = string.Join("", result)
+                String = resultString
             });
         }
     }

@@ -14,8 +14,11 @@ namespace Omnishell.Core.Units.Styles
         [Test]
         public void ShouldProvideCurrentStyle()
         {
-            var profile = CreateProfile();
-            var styleProvider = new StyleProvider(profile);
+            var profile = TestProfile();
+            var styleProvider = new StyleProvider(
+                CreateProfile(profile),
+                new Powershell()
+            );
             var segment = new Mock<BaseSegment>();
             segment.Setup(s => s.Name).Returns("SegmentB");
 
@@ -31,8 +34,10 @@ namespace Omnishell.Core.Units.Styles
         [Test]
         public void ShouldReturnDefaultOnEmptyProfile()
         {
-            var profile = new Profile();
-            var styleProvider = new StyleProvider(profile);
+            var styleProvider = new StyleProvider(
+                CreateProfile(new Profile()),
+                new Powershell()
+            );
             var segment = new Mock<BaseSegment>();
             segment.Setup(s => s.Name).Returns("SegmentB");
 
@@ -48,7 +53,26 @@ namespace Omnishell.Core.Units.Styles
             Assert.That(styleC.FormatType, Is.EqualTo(FormatType.Clear));
         }
 
-        private Profile CreateProfile()
+        private IConfigurationReader CreateProfile(Profile profile)
+        {
+            Mock<IConfigurationReader> configReaderMock = new Mock<IConfigurationReader>();
+            configReaderMock.Setup(x => x.Read()).Returns
+            (
+                new Configuration
+                {
+                    Switch = "profile",
+                    Profiles = new Dictionary<string, Profile>
+                    {
+                        {
+                            "profile", profile
+                        }
+                    }
+                }
+            );
+            return configReaderMock.Object;
+        }
+
+        private Profile TestProfile()
         {
             StyleA = new Style()
             {

@@ -1,55 +1,47 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Omnishell.Core.Segments;
 using Omnishell.Core.Styles;
 using System;
-using System.Collections.Generic;
-using System.IO;
 
 namespace Omnishell.Core
 {
-	internal class Omnishell : IOmnishell
-	{
-		private static IOmnishell omnishell;
+    internal class Omnishell : IOmnishell
+    {
+        private static IOmnishell omnishell;
 
-		public static IOmnishell GetOmnishell(Action<IServiceCollection> services)
-		{
-			if (omnishell == null)
-			{
-				var host = Host.CreateDefaultBuilder().ConfigureServices(services).Build();
-				omnishell = host.Services.GetRequiredService<IOmnishell>();
-			}
-			return omnishell;
-		}
+        public static IOmnishell GetOmnishell(Action<IServiceCollection> services)
+        {
+            if (omnishell == null)
+            {
+                var host = Host.CreateDefaultBuilder().ConfigureServices(services).Build();
+                omnishell = host.Services.GetRequiredService<IOmnishell>();
+            }
+            return omnishell;
+        }
 
-		public Omnishell(IConfigurationReader reader)
-		{
-			_configuration = reader.Read();
-		}
+        public Omnishell
+        (
+            ISegmentResolver segmentResolver,
+            ISegmentDictionary segmentDictionary,
+            IConsolePrinter printer
+        )
+        {
+            _segmentResolver = segmentResolver;
+            _segmentDictionary = segmentDictionary;
+            _printer = printer;
+        }
 
-		private readonly Configuration _configuration;
+        private readonly ISegmentResolver _segmentResolver;
+        private readonly ISegmentDictionary _segmentDictionary;
+        private readonly IConsolePrinter _printer;
 
-		public void PrintPrompt()
-		{
-			Profile profile = _configuration.Profiles[_configuration.Switch];
-			ISegmentResolver resolver = new SegmentResolver(
-				new Powershell(),
-				new FormatProvider(),
-				new StyleProvider(profile)
-			);
-			ISegmentDictionary dictionary = new SegmentDictionary(
-				new List<IBaseSegment>
-				{
-					new DateSegment()
-				}
-			);
-			var segments = dictionary.GetOrderedSegments(profile.LinkedOrder);
-			IConsolePrinter printer = new ConsolePrinter();
-			foreach (var segment in segments)
-			{
-				FormatedStyle formatedSegment = resolver.Resolve(segment);
-				printer.Print(formatedSegment);
-			}
-		}
-	}
+        public void PrintPrompt()
+        {
+            foreach (var segment in _segmentDictionary)
+            {
+                FormatedStyle formatedSegment = _segmentResolver.Resolve(segment);
+                _printer.Print(formatedSegment);
+            }
+        }
+    }
 }

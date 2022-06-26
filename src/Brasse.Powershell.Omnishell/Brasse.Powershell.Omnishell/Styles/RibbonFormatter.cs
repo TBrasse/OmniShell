@@ -16,11 +16,12 @@ namespace Omnishell.Core.Styles
                 },
                 Center = word,
                 Suffix = new ConsoleString()
-                {
-                    Foreground = word.Background,
-                    Background = HasNoNeighbour(right) ? ConsoleColor.Black : right.Background,
-                    String = ""
-                }
+                //Suffix = new ConsoleString()
+                //{
+                //    Foreground = word.Background,
+                //    Background = HasNoNeighbour(right) ? ConsoleColor.Black : right.Background,
+                //    String = ""
+                //}
             };
         }
 
