@@ -5,7 +5,7 @@
         public Profile()
         {
             Order = new string[0];
-            Styles = new Dictionary<string, Style>();
+            Formats = new Dictionary<string, Format>();
         }
 
         private string[] order;
@@ -19,6 +19,6 @@
                 LinkedOrder = new LinkedList<string>(value);
             }
         }
-        public Dictionary<string, Style> Styles { get; set; }
+        public Dictionary<string, Format> Formats { get; set; }
     }
 }
