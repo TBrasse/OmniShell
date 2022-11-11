@@ -1,7 +1,7 @@
 ﻿namespace Core
 {
-    public interface IPathProvider
-    {
-        string GetConfigurationPath();
-    }
+	public interface IPathProvider
+	{
+		string GetConfigurationPath();
+	}
 }

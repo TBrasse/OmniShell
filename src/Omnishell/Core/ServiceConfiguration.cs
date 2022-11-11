@@ -2,5 +2,5 @@
 
 public abstract class ServiceConfiguration
 {
-    public abstract void ServiceCollection(IServiceCollection services);
+	public abstract void ServiceCollection(IServiceCollection services);
 }

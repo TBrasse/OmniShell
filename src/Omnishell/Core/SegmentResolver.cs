@@ -1,24 +1,31 @@
-﻿namespace Core
+﻿using Core.Segment;
+
+namespace Core
 {
-    public class SegmentResolver : ISegmentResolver
-    {
-        private readonly IShellExecutor _shell;
+	public class SegmentResolver : ISegmentResolver
+	{
+		private readonly IShellExecutor _shell;
 
-        public SegmentResolver
-        (
-            IShellExecutor shell
-        )
-        {
-            _shell = shell;
-        }
+		public SegmentResolver
+		(
+			IShellExecutor shell
+		)
+		{
+			_shell = shell;
+		}
 
-        public ISegment[] ResolveSegments(ISegment[] orderedSegments)
-        {
-            foreach (ISegment segment in orderedSegments)
-            {
-                segment.ResolvedValue = _shell.Execute(segment.Expressions);
-            }
-            return orderedSegments;
-        }
-    }
+		public ISegment[] ResolveSegments(ISegment[] orderedSegments)
+		{
+			List<ISegment> resolvedSegments = new List<ISegment>();
+			foreach (ISegment segment in orderedSegments)
+			{
+				bool shoulPrint = segment.Resolve(_shell);
+				if(shoulPrint)
+				{
+					resolvedSegments.Add(segment);
+				}
+			}
+			return resolvedSegments.ToArray();
+		}
+	}
 }

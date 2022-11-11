@@ -1,37 +1,42 @@
 ﻿using Core;
 using System.Collections.ObjectModel;
-using System.Linq.Expressions;
 using System.Management.Automation;
+using System.Management.Automation.Runspaces;
 using System.Text;
 
 public class PowershellExecutor : IShellExecutor
 {
-    public string Execute(string expression)
-    {
-        var powershell = PowerShell.Create();
-        powershell.AddScript(expression);
-        Collection<PSObject> results = powershell.Invoke();
-        StringBuilder stringBuilder = new StringBuilder();
-        foreach (PSObject result in results)
-        {
-            stringBuilder.Append(result.ToString());
-        }
-        return stringBuilder.ToString();
-    }
+	IPSSettingProvider _settingProvider;
 
-    public string Execute(string[] expressions)
-    {
-        var powershell = PowerShell.Create();
-        foreach (var expression in expressions)
-        {
-            powershell.AddScript(expression);
-        }
-        Collection<PSObject> results = powershell.Invoke();
-        StringBuilder stringBuilder = new StringBuilder();
-        foreach (PSObject result in results)
-        {
-            stringBuilder.Append(result.ToString());
-        }
-        return stringBuilder.ToString();
-    }
+	public PowershellExecutor
+	(
+		IPSSettingProvider settingProvider
+	)
+	{
+		_settingProvider = settingProvider;
+	}
+
+
+	public PowershellResult Execute(string command)
+	{
+		using Runspace runspace = RunspaceFactory.CreateRunspace();
+		runspace.Open();
+		runspace.SessionStateProxy.Path.SetLocation(_settingProvider.WorkingDirectory);
+		using Pipeline pipeline = runspace.CreatePipeline();
+		pipeline.Commands.AddScript(command);
+		Collection<PSObject> results = pipeline.Invoke();
+		if (pipeline.HadErrors)
+		{
+			var lastErrorMessage = pipeline.Error.ReadToEnd();
+			return PowershellResult.Failed("Error");
+		}
+		StringBuilder stringBuilder = new StringBuilder();
+		foreach (PSObject result in results)
+		{
+			if (result != null)
+				stringBuilder.Append(result.ToString());
+		}
+		runspace.Close();
+		return PowershellResult.Succeed(stringBuilder.ToString());
+	}
 }

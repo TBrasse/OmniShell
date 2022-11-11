@@ -1,10 +1,10 @@
-﻿using Console;
-using Core;
-using Core.Segment;
+﻿using Core;
 using Core.Style;
+using Core.Segment;
 using Microsoft.Extensions.DependencyInjection;
+using Module;
 
-internal class ConsoleConfiguration : ServiceConfiguration
+public class ModuleConfiguration : ServiceConfiguration
 {
 	public override void ServiceCollection(IServiceCollection services)
 	{
@@ -12,7 +12,9 @@ internal class ConsoleConfiguration : ServiceConfiguration
 		services.AddSingleton<IConfigurationReader, FileConfigurationReader>();
 		services.AddSingleton<IPathProvider, PathProvider>();
 		services.AddSingleton<IShellExecutor, PowershellExecutor>();
+		services.AddSingleton<ISegment, AzContextSegment>();
 		services.AddSingleton<ISegment, DateSegment>();
+		services.AddSingleton<ISegment, GitSegment>();
 		services.AddSingleton<ISegment, NewLineSegment>();
 		services.AddSingleton<ISegment, PathSegment>();
 		services.AddSingleton<ISegment, PlatformSegment>();
@@ -20,11 +22,11 @@ internal class ConsoleConfiguration : ServiceConfiguration
 		services.AddSingleton<ISegmentRegistry, SegmentRegistry>();
 		services.AddSingleton<ISegmentResolver, SegmentResolver>();
 		services.AddSingleton<ISegmentPainter, SegmentPainter>();
-		services.AddSingleton<ISegmentPrinter, ConsolePrinter>();
+		services.AddSingleton<ISegmentPrinter, ModulePrinter>();
 		services.AddSingleton<IStyle, ClearStyle>();
 		services.AddSingleton<IStyle, RibbonStyle>();
 		services.AddSingleton<IStyleRegistry, StyleRegistry>();
-		services.AddSingleton<ISegmentPrinter, ConsolePrinter>();
-		services.AddSingleton<IPSSettingProvider, DefaultPSSettingsProvider>();
+		services.AddSingleton<IPSSettingProvider, HostPSSettingsProvider>();
+		services.AddSingleton<IPSContext, HostPSContext>();
 	}
 }

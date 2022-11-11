@@ -1,6 +1,6 @@
-﻿using Core;
+﻿using Core.Segment;
 
 public interface ISegmentPrinter
 {
-    void Print(ISegment[] paintedSegments);
+	void Print(ISegment[] paintedSegments);
 }

@@ -1,4 +1,4 @@
 ﻿public interface IOmnishell
 {
-    void GetPrompt();
+	void PrintPrompt();
 }

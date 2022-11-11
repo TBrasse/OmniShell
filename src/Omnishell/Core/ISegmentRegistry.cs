@@ -1,6 +1,6 @@
-﻿using Core;
+﻿using Core.Segment;
 
 public interface ISegmentRegistry
 {
-    ISegment[] GetSegments(LinkedList<string> linkedOrder);
+	ISegment[] GetSegments(LinkedList<string> linkedOrder);
 }

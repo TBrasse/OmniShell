@@ -1,6 +1,6 @@
-﻿using Core;
+﻿using Core.Segment;
 
 public interface ISegmentResolver
 {
-    ISegment[] ResolveSegments(ISegment[] orderedSegments);
+	ISegment[] ResolveSegments(ISegment[] orderedSegments);
 }

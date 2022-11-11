@@ -1,8 +1,7 @@
 ﻿namespace Core
 {
-    public interface IShellExecutor
-    {
-        string Execute(string expression);
-        string Execute(string[] expressions);
-    }
+	public interface IShellExecutor
+	{
+		PowershellResult Execute(string command);
+	}
 }
