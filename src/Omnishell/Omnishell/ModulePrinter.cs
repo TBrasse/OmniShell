@@ -1,5 +1,5 @@
-﻿using Core.Segment;
-using Omnishell.Module;
+﻿using Core.Painter;
+using Core.Segments;
 
 namespace Module;
 

@@ -1,8 +1,12 @@
-﻿using Core;
-using Core.Style;
-using Core.Segment;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Module;
+using Core.Painter;
+using Core.Shell;
+using Core.Resolver;
+using Core.Segments;
+using Core.Styles;
+using Core.Utils;
+using Core;
 
 public class ModuleConfiguration : ServiceConfiguration
 {

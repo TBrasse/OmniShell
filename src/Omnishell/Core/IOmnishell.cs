@@ -1,4 +1,5 @@
-﻿public interface IOmnishell
+﻿namespace Core;
+public interface IOmnishell
 {
 	void PrintPrompt();
 }

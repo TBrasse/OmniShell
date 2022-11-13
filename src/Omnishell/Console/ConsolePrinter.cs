@@ -1,5 +1,5 @@
-﻿using Core;
-using Core.Segment;
+﻿using Core.Painter;
+using Core.Segments;
 
 namespace Console
 {

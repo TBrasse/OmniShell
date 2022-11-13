@@ -1,8 +1,8 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
-using Console;
+using Core;
 
-IOmnishell shell = OmnishellFactory<ConsoleConfiguration>.Build<IOmnishell>();
+IOmnishell omnishell = OmnishellFactory<ConsoleConfiguration>.Build<IOmnishell>();
 System.Console.WriteLine("Prompt:");
-shell.PrintPrompt();
+omnishell.PrintPrompt();
 System.Console.WriteLine("End.");

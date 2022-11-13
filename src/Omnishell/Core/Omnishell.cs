@@ -1,5 +1,8 @@
-﻿using Core.Segment;
-using System.Reflection;
+﻿using Core.Painter;
+using Core.Resolver;
+using Core.Segments;
+using Core.Shell;
+using Core.Utils;
 
 namespace Core;
 

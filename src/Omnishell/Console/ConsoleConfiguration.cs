@@ -1,14 +1,18 @@
 ﻿using Console;
 using Core;
-using Core.Segment;
-using Core.Style;
+using Core.Painter;
+using Core.Resolver;
+using Core.Segments;
+using Core.Shell;
+using Core.Styles;
+using Core.Utils;
 using Microsoft.Extensions.DependencyInjection;
 
 internal class ConsoleConfiguration : ServiceConfiguration
 {
 	public override void ServiceCollection(IServiceCollection services)
 	{
-		services.AddSingleton<IOmnishell, Core.Omnishell>();
+		services.AddSingleton<IOmnishell, Omnishell>();
 		services.AddSingleton<IConfigurationReader, FileConfigurationReader>();
 		services.AddSingleton<IPathProvider, PathProvider>();
 		services.AddSingleton<IShellExecutor, PowershellExecutor>();

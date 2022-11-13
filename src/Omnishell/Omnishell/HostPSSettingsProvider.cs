@@ -1,4 +1,5 @@
-﻿using System.Management.Automation;
+﻿using Core.Shell;
+using System.Management.Automation;
 
 internal class HostPSSettingsProvider : IPSSettingProvider
 {

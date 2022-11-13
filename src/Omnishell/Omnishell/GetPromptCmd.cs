@@ -1,41 +1,33 @@
-﻿using System.Management.Automation;
+﻿using Core;
+using System.Management.Automation;
 
-namespace Omnishell.Module
+namespace Module;
+
+[Cmdlet(VerbsCommon.Get, "Prompt")]
+[OutputType(typeof(string))]
+public class GetPromptCmd : PSCmdlet
 {
-	[Cmdlet(VerbsCommon.Get, "Prompt")]
-	[OutputType(typeof(string))]
-	public class GetPromptCmd : PSCmdlet
+	private static IOmnishell _omnishell;
+	private static IPSContext _context;
+
+	public GetPromptCmd()
 	{
-		private static IOmnishell _omnishell;
-		private static IPSContext _context;
-
-		public GetPromptCmd()
+		if (_omnishell == null)
 		{
-			if (_omnishell == null)
-			{
-				_omnishell = OmnishellFactory<ModuleConfiguration>.Build<IOmnishell>();
-				_context = OmnishellFactory<ModuleConfiguration>.Build<IPSContext>();
-			}
+			_omnishell = OmnishellFactory<ModuleConfiguration>.Build<IOmnishell>();
+			_context = OmnishellFactory<ModuleConfiguration>.Build<IPSContext>();
 		}
+	}
 
-		protected override void BeginProcessing()
-		{
-			WriteVerbose("Begin!");
-		}
+	protected override void BeginProcessing()
+	{
+		_context.Host = Host;
+		_context.WorkingDir = SessionState.Path.CurrentFileSystemLocation.Path;
+	}
 
-		// This method will be called for each input received from the pipeline to this cmdlet; if no input is received, this method is not called
-		protected override void ProcessRecord()
-		{
-			_context.Host = Host;
-			_context.WorkingDir = SessionState.Path.CurrentFileSystemLocation.Path;
-			_omnishell.PrintPrompt();
-			WriteObject("");
-		}
-
-		// This method will be called once at the end of pipeline execution; if no input is received, this method is not called
-		protected override void EndProcessing()
-		{
-			WriteVerbose("End!");
-		}
+	protected override void ProcessRecord()
+	{
+		_omnishell.PrintPrompt();
+		WriteObject("");
 	}
 }
