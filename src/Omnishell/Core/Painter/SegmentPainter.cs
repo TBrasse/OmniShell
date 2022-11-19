@@ -15,11 +15,11 @@ public class SegmentPainter : ISegmentPainter
         _styleProvider = styleProvider;
     }
 
-    public ISegment[] PaintSegments(ISegment[] orderedSegments, Dictionary<string, Format> formats)
+    public AbstractSegment[] PaintSegments(AbstractSegment[] orderedSegments, Dictionary<string, Format> formats)
     {
         for (int index = 0; index < orderedSegments.Length; index++)
         {
-            ISegment previous = null, current, next = null;
+			AbstractSegment previous = null, current, next = null;
             current = orderedSegments[index];
             current.Format = formats[current.Name];
             if (index >= 1)

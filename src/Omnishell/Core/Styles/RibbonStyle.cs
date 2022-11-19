@@ -7,11 +7,11 @@ public class RibbonStyle : IStyle
 {
 	public string Name => "ribbon";
 
-	public ISegment ApplyStyle
+	public AbstractSegment ApplyStyle
 	(
-		ISegment current,
-		ISegment? previous,
-		ISegment? next
+		AbstractSegment current,
+		AbstractSegment? previous,
+		AbstractSegment? next
 	)
 	{
 		current.Prefix = new PaintedString
@@ -24,7 +24,7 @@ public class RibbonStyle : IStyle
 		{
 			Background = current.Format.Background,
 			Foreground = current.Format.Foreground,
-			String = current.Value
+			String = $" {current.Value} "
 		};
 		current.Suffix = new PaintedString
 		{
@@ -35,12 +35,12 @@ public class RibbonStyle : IStyle
 		return current;
 	}
 
-	private static bool Exists(ISegment? segement)
+	private static bool Exists(AbstractSegment? segement)
 	{
 		return !string.IsNullOrEmpty(segement?.Value);
 	}
 
-	private static bool SameStyle(ISegment? segment, ISegment? segment2)
+	private static bool SameStyle(AbstractSegment? segment, AbstractSegment? segment2)
 	{
 		return segment?.Format.Style == segment2?.Format.Style;
 	}

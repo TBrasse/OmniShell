@@ -1,21 +1,19 @@
-﻿using Core.Painter;
-using Core.Shell;
+﻿using Core.Shell;
 
 namespace Core.Segments;
 
-public class AzContextSegment : ISegment
+public class AzContextSegment : AbstractSegment
 {
-	public string Name { get; set; } = "azcontext";
-	public string Expression { get; } = "(Get-AzContext).Subscription.Name";
-	public Format Format { get; set; }
-	public string Value { get; set; }
-	public PaintedString Prefix { get; set; }
-	public PaintedString Center { get; set; }
-	public PaintedString Suffix { get; set; }
+	private string _expression = "(Get-AzContext).Subscription.Name";
 
-	public bool Resolve(IShellExecutor shell)
+	public AzContextSegment()
 	{
-		PowershellResult result = shell.Execute(Expression);
+		Name = "azcontext";
+	}
+
+	public override bool Resolve(IShellExecutor shell)
+	{
+		PowershellResult result = shell.Execute(_expression);
 		Value = result.Value;
 		return result.Successfull && !string.IsNullOrEmpty(result.Value);
 	}

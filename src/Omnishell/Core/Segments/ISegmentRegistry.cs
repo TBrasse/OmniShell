@@ -2,5 +2,5 @@
 
 public interface ISegmentRegistry
 {
-	ISegment[] GetSegments(LinkedList<string> linkedOrder);
+	AbstractSegment[] GetSegments(LinkedList<string> linkedOrder);
 }

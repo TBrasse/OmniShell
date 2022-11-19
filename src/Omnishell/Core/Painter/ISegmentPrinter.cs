@@ -4,5 +4,5 @@ namespace Core.Painter;
 
 public interface ISegmentPrinter
 {
-	void Print(ISegment[] paintedSegments);
+	void Print(AbstractSegment[] paintedSegments);
 }

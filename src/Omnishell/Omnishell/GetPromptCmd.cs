@@ -27,7 +27,6 @@ public class GetPromptCmd : PSCmdlet
 
 	protected override void ProcessRecord()
 	{
-		_omnishell.PrintPrompt();
-		WriteObject("");
+		WriteObject(_omnishell.PrintPrompt());
 	}
 }

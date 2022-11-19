@@ -1,22 +1,74 @@
-﻿using Core.Painter;
-using Core.Shell;
+﻿using Core.Shell;
 
 namespace Core.Segments;
 
-public class GitSegment : ISegment
+public class GitSegment : AbstractSegment
 {
-	public string Name { get; set; } = "git";
-	public string Expression { get; } = "git branch --show-current";
-	public Format Format { get; set; }
-	public string Value { get; set; }
-	public PaintedString Prefix { get; set; }
-	public PaintedString Center { get; set; }
-	public PaintedString Suffix { get; set; }
+	private string[] _expressions { get; } = new[] {
+		"git branch --show-current",
+		"git status -s"
+	};
 
-	public bool Resolve(IShellExecutor shell)
+	public GitSegment()
 	{
-		PowershellResult result = shell.Execute(Expression);
-		Value = result.Value;
-		return result.Successfull && !string.IsNullOrEmpty(result.Value);
+		Name = "git";
+	}
+
+	public override bool Resolve(IShellExecutor shell)
+	{
+		PowershellResult branchResult = shell.Execute(_expressions[0]);
+		if (!branchResult.Value.StartsWith("fatal:"))
+		{
+			Value = branchResult.Value;
+			PowershellResult rawStatusResult = shell.Execute(_expressions[1], true);
+			if (!string.IsNullOrEmpty(rawStatusResult.Value))
+			{
+				ParsGitFiles(rawStatusResult);
+			}
+		}
+		return branchResult.Successfull && !string.IsNullOrEmpty(branchResult.Value);
+	}
+
+	private void ParsGitFiles(PowershellResult rawStatusResult)
+	{
+		string[] lines = rawStatusResult.Value.Split("\r\n");
+		//.Where(x => !string.IsNullOrEmpty(x))
+		//.Select(x => x.Trim().Split(' ')[0]);
+		int added = 0, modified = 0, deleted = 0, untracked = 0, unknown = 0;
+		foreach (string line in lines)
+		{
+			if (!string.IsNullOrEmpty(line))
+			{
+				string label = line.Trim().Split(' ')[0];
+				switch (label)
+				{
+					case "A": added++; break;
+					case "D": deleted++; break;
+					case "M": modified++; break;
+					case "??": untracked++; break;
+					default: unknown++; break;
+				}
+			}
+		}
+		if (added > 0)
+		{
+			Value += $" A{added}";
+		}
+		if (deleted > 0)
+		{
+			Value += $" D{deleted}";
+		}
+		if (modified > 0)
+		{
+			Value += $" M{modified}";
+		}
+		if (untracked > 0)
+		{
+			Value += $" U{untracked}";
+		}
+		if (unknown > 0)
+		{
+			Value += $" ?{unknown}";
+		}
 	}
 }

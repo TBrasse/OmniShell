@@ -2,23 +2,23 @@
 
 public class SegmentRegistry : ISegmentRegistry
 {
-    private readonly Dictionary<string, ISegment> _segmentsRegistry;
+    private readonly Dictionary<string, AbstractSegment> _segmentsRegistry;
 
     public SegmentRegistry
     (
-        IEnumerable<ISegment> segments
+        IEnumerable<AbstractSegment> segments
     )
     {
-        _segmentsRegistry = new Dictionary<string, ISegment>();
-        foreach (ISegment segment in segments)
+        _segmentsRegistry = new Dictionary<string, AbstractSegment>();
+        foreach (AbstractSegment segment in segments)
         {
             _segmentsRegistry.Add(segment.Name, segment);
         }
     }
 
-    public ISegment[] GetSegments(LinkedList<string> linkedOrder)
+    public AbstractSegment[] GetSegments(LinkedList<string> linkedOrder)
     {
-        List<ISegment> segments = new List<ISegment>();
+        List<AbstractSegment> segments = new List<AbstractSegment>();
         foreach (string segmentName in linkedOrder)
         {
             if (_segmentsRegistry.ContainsKey(segmentName))

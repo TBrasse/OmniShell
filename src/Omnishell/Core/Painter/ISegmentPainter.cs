@@ -4,5 +4,5 @@ namespace Core.Painter;
 
 public interface ISegmentPainter
 {
-	ISegment[] PaintSegments(ISegment[] orderedSegments, Dictionary<string, Format> formats);
+	AbstractSegment[] PaintSegments(AbstractSegment[] orderedSegments, Dictionary<string, Format> formats);
 }

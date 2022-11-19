@@ -7,11 +7,11 @@ public class ClearStyle : IStyle
 {
 	public string Name => "clear";
 
-	public ISegment ApplyStyle
+	public AbstractSegment ApplyStyle
 	(
-		ISegment current,
-		ISegment? previous,
-		ISegment? next
+		AbstractSegment current,
+		AbstractSegment? previous,
+		AbstractSegment? next
 	)
 	{
 		current.Prefix = new PaintedString();

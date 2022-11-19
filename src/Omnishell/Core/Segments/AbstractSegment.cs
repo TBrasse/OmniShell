@@ -5,14 +5,12 @@ namespace Core.Segments;
 
 public abstract class AbstractSegment
 {
-	virtual public string Name { get; set; }
-	virtual public Format Format { get; set; }
-	virtual public string Value { get; set; }
-	virtual public PaintedString Prefix { get; set; }
-	virtual public PaintedString Center { get; set; }
-	virtual public PaintedString Suffix { get; set; }
+	public string Name { get; set; }
+	public Format Format { get; set; }
+	public string Value { get; set; }
+	public PaintedString Prefix { get; set; }
+	public PaintedString Center { get; set; }
+	public PaintedString Suffix { get; set; }
+	public bool IsPrompt { get; set; } = false;
 	abstract public bool Resolve(IShellExecutor shell);
-	virtual public Task<bool> ResolveAsync(IShellExecutor shell){
-		return Task<bool>.Run(() => Resolve(shell));
-	}
 }

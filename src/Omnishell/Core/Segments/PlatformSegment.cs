@@ -1,19 +1,17 @@
-﻿using Core.Painter;
-using Core.Shell;
+﻿using Core.Shell;
 
 namespace Core.Segments;
 
-public class PlatformSegment : ISegment
+public class PlatformSegment : AbstractSegment
 {
-	public string Name { get; set; } = "platform";
-	public string Expression { get; } = "switch([Environment]::OSVersion.Platform){ 'Win32NT'{''} 'Unix'{''} 'MacOSX'{''}}";
-	public Format Format { get; set; }
-	public string Value { get; set; }
-	public PaintedString Prefix { get; set; }
-	public PaintedString Center { get; set; }
-	public PaintedString Suffix { get; set; }
+	private string Expression = "switch([Environment]::OSVersion.Platform){ 'Win32NT'{''} 'Unix'{''} 'MacOSX'{''}}";
 
-	public bool Resolve(IShellExecutor shell)
+	public PlatformSegment()
+	{
+		Name = "platform";
+	}
+
+	public override bool Resolve(IShellExecutor shell)
 	{
 		PowershellResult result = shell.Execute(Expression);
 		Value = result.Value;

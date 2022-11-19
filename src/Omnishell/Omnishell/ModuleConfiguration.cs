@@ -12,17 +12,18 @@ public class ModuleConfiguration : ServiceConfiguration
 {
 	public override void ServiceCollection(IServiceCollection services)
 	{
-		services.AddSingleton<IOmnishell, Core.Omnishell>();
+		services.AddSingleton<IOmnishell, Omnishell>();
 		services.AddSingleton<IConfigurationReader, FileConfigurationReader>();
 		services.AddSingleton<IPathProvider, PathProvider>();
 		services.AddSingleton<IShellExecutor, PowershellExecutor>();
-		services.AddSingleton<ISegment, AzContextSegment>();
-		services.AddSingleton<ISegment, DateSegment>();
-		services.AddSingleton<ISegment, GitSegment>();
-		services.AddSingleton<ISegment, NewLineSegment>();
-		services.AddSingleton<ISegment, PathSegment>();
-		services.AddSingleton<ISegment, PlatformSegment>();
-		services.AddSingleton<ISegment, PromptSegment>();
+		services.AddSingleton<IProfileProvider, ProfileProvider>();
+		services.AddSingleton<AbstractSegment, AzContextSegment>();
+		services.AddSingleton<AbstractSegment, DateSegment>();
+		services.AddSingleton<AbstractSegment, GitSegment>();
+		services.AddSingleton<AbstractSegment, NewLineSegment>();
+		services.AddSingleton<AbstractSegment, PathSegment>();
+		services.AddSingleton<AbstractSegment, PlatformSegment>();
+		services.AddSingleton<AbstractSegment, PromptSegment>();
 		services.AddSingleton<ISegmentRegistry, SegmentRegistry>();
 		services.AddSingleton<ISegmentResolver, SegmentResolver>();
 		services.AddSingleton<ISegmentPainter, SegmentPainter>();

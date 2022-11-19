@@ -1,5 +1,5 @@
 ﻿namespace Core;
 public interface IOmnishell
 {
-	void PrintPrompt();
+	string PrintPrompt();
 }

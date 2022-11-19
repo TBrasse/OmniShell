@@ -13,7 +13,7 @@ internal class ModulePrinter : ISegmentPrinter
 	}
 
 
-	public void Print(ISegment[] paintedSegments)
+	public void Print(AbstractSegment[] paintedSegments)
 	{
 		foreach (var segment in paintedSegments)
 		{
@@ -21,7 +21,7 @@ internal class ModulePrinter : ISegmentPrinter
 		}
 	}
 
-	private void PrintSegment(ISegment segment)
+	private void PrintSegment(AbstractSegment segment)
 	{
 		if (!string.IsNullOrEmpty(segment.Prefix.String))
 			_context.Host.UI.Write

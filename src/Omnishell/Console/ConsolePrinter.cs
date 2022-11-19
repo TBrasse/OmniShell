@@ -5,9 +5,9 @@ namespace Console
 {
 	internal class ConsolePrinter : ISegmentPrinter
 	{
-		public void Print(ISegment[] paintedSegments)
+		public void Print(AbstractSegment[] paintedSegments)
 		{
-			foreach (ISegment segment in paintedSegments)
+			foreach (AbstractSegment segment in paintedSegments)
 			{
 				System.Console.Write(segment.Prefix.String);
 				System.Console.Write(segment.Center.String);

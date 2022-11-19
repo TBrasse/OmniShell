@@ -4,7 +4,7 @@ namespace Core.Shell;
 
 public class DefaultPSSettingsProvider : IPSSettingProvider
 {
-	public string WorkingDirectory { get; } = Directory.GetCurrentDirectory();
+	public string WorkingDirectory { get; } = "D:\\Workspace\\Projects\\OmniShell\\";// Directory.GetCurrentDirectory();
 
 	public PSInvocationSettings GetSettings()
 	{
