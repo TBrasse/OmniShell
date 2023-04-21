@@ -1,23 +1,23 @@
 ﻿namespace Core.Shell;
 
-public class PowershellResult
+public class ShellResult
 {
 	public bool Successfull { get; init; }
 	public string Value { get; init; } = string.Empty;
 	public string Error { get; init; } = string.Empty;
 
-	internal static PowershellResult Failed(string errorMessage)
+	internal static ShellResult Failed(string errorMessage)
 	{
-		return new PowershellResult
+		return new ShellResult
 		{
 			Successfull = false,
 			Error = errorMessage
 		};
 	}
 
-	internal static PowershellResult Succeed(string result)
+	internal static ShellResult Succeed(string result)
 	{
-		return new PowershellResult
+		return new ShellResult
 		{
 			Successfull = true,
 			Value = result

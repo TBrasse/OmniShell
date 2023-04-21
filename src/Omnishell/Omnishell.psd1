@@ -9,7 +9,9 @@
 @{
 
 # Script module or binary module file associated with this manifest.
-RootModule = '.\Omnishell\bin\Release\net7.0\Omnishell.dll'
+# RootModule = '.\Omnishell\bin\Release\net7.0\Omnishell.dll'
+RootModule = 'D:\Workspace\Projects\OmniShell\src\Omnishell\Omnishell\bin\Debug\net7.0\win-x64\Omnishell.dll'
+# RootModule = '/mnt/d/Workspace/Projects/OmniShell/src/Omnishell/Omnishell/bin/Debug/net7.0/linux-x64/Omnishell.dll'
 
 # Version number of this module.
 ModuleVersion = '0.0.1'

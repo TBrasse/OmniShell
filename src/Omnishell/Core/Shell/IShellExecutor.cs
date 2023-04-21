@@ -2,5 +2,5 @@
 
 public interface IShellExecutor
 {
-	PowershellResult Execute(string command, bool withNewLine = false);
+	ShellResult Execute(string command, bool withNewLine = false);
 }

@@ -6,13 +6,14 @@ public class PromptSegment : AbstractSegment
 {
 	public PromptSegment()
 	{
-		Name = "prompt";
 		IsPrompt = true;
 	}
 
+	public override string Name => "prompt";
+
 	public override bool Resolve(IShellExecutor shell)
 	{
-		Value = ">";
+		Value = "> ";
 		return true;
 	}
 }

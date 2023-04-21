@@ -21,7 +21,7 @@ public class ProfileProvider : IProfileProvider
 	public Profile GetProfile()
 	{
 		Configuration configuration = _configurationReader.Read();
-		PowershellResult profileResult = _shell.Execute(configuration.Switch);
+		ShellResult profileResult = _shell.Execute(configuration.Switch);
 		string profileName = profileResult.Successfull ? profileResult.Value : "default";
 		return configuration.Profiles[profileName];
 	}

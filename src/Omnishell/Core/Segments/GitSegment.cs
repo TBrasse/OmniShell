@@ -9,18 +9,15 @@ public class GitSegment : AbstractSegment
 		"git status -s"
 	};
 
-	public GitSegment()
-	{
-		Name = "git";
-	}
+	public override string Name => "git";
 
 	public override bool Resolve(IShellExecutor shell)
 	{
-		PowershellResult branchResult = shell.Execute(_expressions[0]);
+		ShellResult branchResult = shell.Execute(_expressions[0]);
 		if (!branchResult.Value.StartsWith("fatal:"))
 		{
 			Value = branchResult.Value;
-			PowershellResult rawStatusResult = shell.Execute(_expressions[1], true);
+			ShellResult rawStatusResult = shell.Execute(_expressions[1], true);
 			if (!string.IsNullOrEmpty(rawStatusResult.Value))
 			{
 				ParsGitFiles(rawStatusResult);
@@ -29,7 +26,7 @@ public class GitSegment : AbstractSegment
 		return branchResult.Successfull && !string.IsNullOrEmpty(branchResult.Value);
 	}
 
-	private void ParsGitFiles(PowershellResult rawStatusResult)
+	private void ParsGitFiles(ShellResult rawStatusResult)
 	{
 		string[] lines = rawStatusResult.Value.Split("\r\n");
 		//.Where(x => !string.IsNullOrEmpty(x))

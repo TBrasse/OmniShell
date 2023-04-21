@@ -6,14 +6,11 @@ public class PlatformSegment : AbstractSegment
 {
 	private string Expression = "switch([Environment]::OSVersion.Platform){ 'Win32NT'{''} 'Unix'{''} 'MacOSX'{''}}";
 
-	public PlatformSegment()
-	{
-		Name = "platform";
-	}
+	public override string Name => "platform";
 
 	public override bool Resolve(IShellExecutor shell)
 	{
-		PowershellResult result = shell.Execute(Expression);
+		ShellResult result = shell.Execute(Expression);
 		Value = result.Value;
 		return result.Successfull && !string.IsNullOrEmpty(result.Value);
 	}

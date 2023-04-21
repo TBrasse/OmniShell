@@ -24,6 +24,7 @@ public class ModuleConfiguration : ServiceConfiguration
 		services.AddSingleton<AbstractSegment, PathSegment>();
 		services.AddSingleton<AbstractSegment, PlatformSegment>();
 		services.AddSingleton<AbstractSegment, PromptSegment>();
+		services.AddSingleton<AbstractSegment, PidSegment>();
 		services.AddSingleton<ISegmentRegistry, SegmentRegistry>();
 		services.AddSingleton<ISegmentResolver, SegmentResolver>();
 		services.AddSingleton<ISegmentPainter, SegmentPainter>();

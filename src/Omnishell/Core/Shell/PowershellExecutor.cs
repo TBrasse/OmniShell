@@ -19,13 +19,13 @@ public class PowershellExecutor : IShellExecutor
 		_powerShell = PowerShell.Create();
 	}
 
-	public PowershellResult Execute(string command, bool withNewLine = false)
+	public ShellResult Execute(string command, bool withNewLine = false)
 	{
 		SetWorkingDir(_powerShell);
 		return InvokeCommand(command, withNewLine);
 	}
 
-	public IEnumerable<PowershellResult> Execute(string[] commands, bool withNewLine = false)
+	public IEnumerable<ShellResult> Execute(string[] commands, bool withNewLine = false)
 	{
 		SetWorkingDir(_powerShell);
 		foreach (string command in commands)
@@ -34,13 +34,13 @@ public class PowershellExecutor : IShellExecutor
 		}
 	}
 
-	private PowershellResult InvokeCommand(string command, bool withNewLine)
+	private ShellResult InvokeCommand(string command, bool withNewLine)
 	{
 		_powerShell.AddStatement().AddScript(command);
 		Collection<PSObject> result = _powerShell.Invoke();
 		string resultString = ConvertToString(result, withNewLine);
 		_powerShell.Commands.Clear();
-		return PowershellResult.Succeed(resultString);
+		return ShellResult.Succeed(resultString);
 	}
 
 	private void SetWorkingDir(PowerShell powershell)

@@ -1,35 +1,49 @@
 {
-  "version": "0.4.0",
-  "switch": "switch([Environment]::OSVersion.Platform){ 'Win32NT'{'default'} 'Unix'{'Unix'}}",
-  "profiles": {
+  "Version": "0.4.0",
+  "Switch": "switch([Environment]::OSVersion.Platform){ 'Win32NT'{'default'} 'Unix'{'Unix'}}",
+  "Profiles": {
     "default": {
-      "order" : [
-        "date", "platform", "azcontext", "git", "vpnTest", "newLine",
+      "Order" : [
+        "platform", "date", "pid", "git", "azcontext" ,"newLine",
         "path", "newLine",
         "prompt"
       ],
-      "styles" :{
-        "date"      :{ "format" : "clear", "foreground" : "DarkGray" },
-        "platform"  :{ "format" : "ribbon", "foreground" : "Black", "background": "DarkBlue" },
-        "azcontext" :{ "format" : "ribbon", "foreground" : "Black", "background": "DarkGray" },
-        "git"       :{ "format" : "ribbon", "foreground" : "Black", "background": "DarkGreen" },
-        "vpnTest"   :{ "format" : "ribbon", "foreground" : "Black", "background": "Red" },
-        "newLine"   :{ "format" : "clear" },
-        "path"      :{ "format" : "clear", "foreground" : "White" },
-        "prompt"    :{ "format" : "clear", "foreground" : "White" }
+      "Formats" :{
+        "platform"  :{ "Style" : "ribbon", "Foreground" : "Black",     "Background": "Blue"     },
+        "date"      :{ "Style" : "ribbon", "Foreground" : "Black",    "Background": "DarkGray"    },
+        "pid"       :{ "Style" : "ribbon", "Foreground" : "Gray",     "Background": "DarkBlue"     },
+        "azcontext" :{ "Style" : "ribbon", "Foreground" : "Black",    "Background": "DarkGray" },
+        "git"       :{ "Style" : "ribbon", "Foreground" : "Black",    "Background": "Green"    },
+        "vpnTest"   :{ "Style" : "ribbon", "Foreground" : "Black",    "Background": "Red"      },
+        "newLine"   :{ "Style" : "clear" },
+        "path"      :{ "Style" : "clear", "Foreground" : "White" },
+        "prompt"    :{ "Style" : "clear", "Foreground" : "White" }
       },
-      "formats": {
+      "Styles": {
       },
-      "segments": {
+      "Segments": {
       }
     },
     "Unix": {
-      "order" : [
-        "date", "platform", "azcontext", "git", "linuxVpnTest", "newLine",
-        "path", "newLine",
-        "prompt"
+      "Order" : [
+          "platform", "date", "pid", "git", "azcontext" ,"newLine",
+          "path", "newLine",
+          "prompt"
       ],
-      "segments": {
+      "Formats" :{
+          "platform"  :{ "Style" : "ribbon", "Foreground" : "Black",     "Background": "Blue"     },
+          "date"      :{ "Style" : "ribbon", "Foreground" : "Black",    "Background": "DarkGray"    },
+          "pid"       :{ "Style" : "ribbon", "Foreground" : "Gray",     "Background": "DarkBlue"     },
+          "azcontext" :{ "Style" : "ribbon", "Foreground" : "Black",    "Background": "DarkGray" },
+          "git"       :{ "Style" : "ribbon", "Foreground" : "Black",    "Background": "Green"    },
+          "vpnTest"   :{ "Style" : "ribbon", "Foreground" : "Black",    "Background": "Red"      },
+          "newLine"   :{ "Style" : "clear" },
+          "path"      :{ "Style" : "clear", "Foreground" : "White" },
+          "prompt"    :{ "Style" : "clear", "Foreground" : "White" }
+      },
+      "Styles": {
+      },
+      "Segments": {
       }
     }
   }
