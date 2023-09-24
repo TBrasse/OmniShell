@@ -12,7 +12,7 @@
 RootModule = '.\Omnishell\bin\Release\net7.0\Omnishell.dll'
 
 # Version number of this module.
-ModuleVersion = '0.0.1'
+ModuleVersion = '0.0.4'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -21,16 +21,16 @@ ModuleVersion = '0.0.1'
 GUID = 'ddf83915-2daa-4f53-875e-9cc362c0a2bd'
 
 # Author of this module
-Author = 'AntiNut'
+Author = 'Tomasz.Brasse'
 
 # Company or vendor of this module
-CompanyName = 'AntiNut'
+CompanyName = 'Tomasz Brasse'
 
 # Copyright statement for this module
-Copyright = '(c) AntiNut. All rights reserved.'
+Copyright = '(c) Tomasz Brasse All rights reserved.'
 
 # Description of the functionality provided by this module
-# Description = ''
+Description = 'C# module augmenting your powershell prompt'
 
 # Minimum version of the PowerShell engine required by this module
 # PowerShellVersion = ''

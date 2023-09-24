@@ -18,6 +18,9 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{0D8A1DB9-67AE-4204-B586-DE784F98A452}"
 	ProjectSection(SolutionItems) = preProject
 		..\..\.gitignore = ..\..\.gitignore
+		config.json = config.json
+		Omnishell.psd1 = Omnishell.psd1
+		Omnishell.psm1 = Omnishell.psm1
 	EndProjectSection
 EndProject
 Global

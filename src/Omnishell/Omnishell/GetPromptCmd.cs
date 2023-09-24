@@ -16,6 +16,7 @@ public class GetPromptCmd : PSCmdlet
 		{
 			_omnishell = OmnishellFactory<ModuleConfiguration>.Build<IOmnishell>();
 			_context = OmnishellFactory<ModuleConfiguration>.Build<IPSContext>();
+			ConfigFile.SetupConfigFile();
 		}
 	}
 
