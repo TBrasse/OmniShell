@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.3.32611.2
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Module", "Omnishell\Module.csproj", "{D635B385-429F-4474-ADB9-14BAA0061B0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Module", "Module\Module.csproj", "{D635B385-429F-4474-ADB9-14BAA0061B0D}"
 	ProjectSection(ProjectDependencies) = postProject
 		{0CFE7EF5-9D62-41CE-BD9A-C1637848FAE3} = {0CFE7EF5-9D62-41CE-BD9A-C1637848FAE3}
 	EndProjectSection
