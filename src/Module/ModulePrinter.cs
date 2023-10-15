@@ -1,4 +1,5 @@
-﻿using Core.Painter;
+﻿using Core;
+using Core.Painter;
 using Core.Segments;
 
 namespace Module;

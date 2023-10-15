@@ -18,7 +18,11 @@ public class StyleRegistry : IStyleRegistry
 
 	public IStyle GetStyle(string styleName)
 	{
-		//todo: fix not registred styles
+		_registeredStyles.TryGetValue(styleName, out IStyle? style);
+		if (style == null)
+		{
+			return new ClearStyle();
+		}
 		return _registeredStyles[styleName];
 	}
 }

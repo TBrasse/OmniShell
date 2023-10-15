@@ -5,14 +5,14 @@ namespace Core.Painter;
 
 public class SegmentPainter : ISegmentPainter
 {
-    private readonly IStyleRegistry _styleProvider;
+    private readonly IStyleRegistry _styleRegistry;
 
     public SegmentPainter
     (
-        IStyleRegistry styleProvider
+        IStyleRegistry styleRegistry
     )
     {
-        _styleProvider = styleProvider;
+        _styleRegistry = styleRegistry;
     }
 
     public AbstractSegment[] PaintSegments(AbstractSegment[] orderedSegments, Dictionary<string, Format> formats)
@@ -32,8 +32,7 @@ public class SegmentPainter : ISegmentPainter
                 next = orderedSegments[index + 1];
                 next.Format = formats[next.Name];
             }
-            IStyle style = _styleProvider.GetStyle(current.Format.Style);
-            //TODO: change setting values inside applystyle method
+            IStyle style = _styleRegistry.GetStyle(current.Format.Style);
             style.ApplyStyle(current, previous, next);
         }
         return orderedSegments;

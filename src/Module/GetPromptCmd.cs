@@ -8,22 +8,20 @@ namespace Module;
 public class GetPromptCmd : PSCmdlet
 {
 	private static IOmnishell _omnishell;
-	private static IPSContext _context;
 
 	public GetPromptCmd()
 	{
 		if (_omnishell == null)
 		{
 			_omnishell = OmnishellFactory<ModuleConfiguration>.Build<IOmnishell>();
-			_context = OmnishellFactory<ModuleConfiguration>.Build<IPSContext>();
 			ConfigFile.SetupConfigFile();
 		}
 	}
 
 	protected override void BeginProcessing()
 	{
-		_context.Host = Host;
-		_context.WorkingDir = SessionState.Path.CurrentFileSystemLocation.Path;
+		_omnishell.Context.Host = Host;
+		_omnishell.Context.WorkingDir = SessionState.Path.CurrentFileSystemLocation.Path;
 	}
 
 	protected override void ProcessRecord()

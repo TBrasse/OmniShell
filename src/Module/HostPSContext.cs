@@ -1,4 +1,5 @@
-﻿using System.Management.Automation.Host;
+﻿using Core;
+using System.Management.Automation.Host;
 
 internal class HostPSContext : IPSContext
 {
