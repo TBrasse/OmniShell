@@ -9,6 +9,7 @@ public class Profile
 		Order = new string[0];
 		Formats = new Dictionary<string, Format>();
 		Segments = new Dictionary<string, string>();
+		Styles = new Dictionary<string, string>();
 	}
 
 	private string[] order;
@@ -25,4 +26,5 @@ public class Profile
 
 	public Dictionary<string, Format> Formats { get; set; }
 	public Dictionary<string, string> Segments { get; set; }
+	public Dictionary<string, string> Styles { get; set; }
 }

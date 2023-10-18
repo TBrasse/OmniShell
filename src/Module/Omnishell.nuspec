@@ -1,4 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
-  <file src="config.json" target="config.json" />
+  <file src="config.yml" target="config.yml" />
 </package>
