@@ -34,6 +34,7 @@ public class Omnishell : IOmnishell
 	public string PrintPrompt()
 	{
 		Profile profile = _profileProvider.GetProfile();
+		_segmentRegistry.RegisterCustomSegments(profile.Segments);
 		AbstractSegment[] orderedSegments = _segmentRegistry.GetSegments(profile.LinkedOrder);
 		(AbstractSegment[] resolvedSegments, string[] promptSegments) = _segmentResolver.ResolveSegments(orderedSegments);
 		AbstractSegment[] paintedSegments = _segmentPainter.PaintSegments(resolvedSegments, profile.Formats);

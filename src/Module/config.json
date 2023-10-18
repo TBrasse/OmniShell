@@ -22,6 +22,7 @@
       "Styles": {
       },
       "Segments": {
+        "pid" : "$PID"
       }
     },
     "Unix": {
@@ -44,6 +45,7 @@
       "Styles": {
       },
       "Segments": {
+        "pid" : "$PID"
       }
     }
   }

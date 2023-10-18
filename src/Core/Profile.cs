@@ -8,6 +8,7 @@ public class Profile
 	{
 		Order = new string[0];
 		Formats = new Dictionary<string, Format>();
+		Segments = new Dictionary<string, string>();
 	}
 
 	private string[] order;
@@ -21,5 +22,7 @@ public class Profile
 			LinkedOrder = new LinkedList<string>(value);
 		}
 	}
+
 	public Dictionary<string, Format> Formats { get; set; }
+	public Dictionary<string, string> Segments { get; set; }
 }
