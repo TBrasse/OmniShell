@@ -6,15 +6,15 @@ public class Profile
 {
 	public Profile()
 	{
-		Order = new string[0];
+		Order = new List<string>();
 		Formats = new Dictionary<string, Format>();
 		Segments = new Dictionary<string, string>();
 		Styles = new Dictionary<string, string>();
 	}
 
-	private string[] order;
+	private List<String> order;
 	public LinkedList<string> LinkedOrder { get; internal set; }
-	public string[] Order
+	public List<String> Order
 	{
 		get { return order; }
 		set

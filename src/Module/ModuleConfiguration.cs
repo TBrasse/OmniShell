@@ -5,7 +5,6 @@ using Core.Shell;
 using Core.Resolver;
 using Core.Segments;
 using Core.Styles;
-using Core.Utils;
 using Core;
 
 public class ModuleConfiguration : ServiceConfiguration
@@ -14,9 +13,11 @@ public class ModuleConfiguration : ServiceConfiguration
 	{
 		services.AddSingleton<IOmnishell, Omnishell>();
 		services.AddSingleton<IConfigurationReader, FileConfigurationReader>();
+		services.AddSingleton<IConfigurationWriter, FileConfigurationWriter>();
 		services.AddSingleton<IPathProvider, PathProvider>();
 		services.AddSingleton<IShellExecutor, PowershellExecutor>();
-		services.AddSingleton<IProfileProvider, ProfileProvider>();
+		services.AddSingleton<IConfigReader, ConfigReader>();
+		services.AddSingleton<IConfigWriter, ConfigWriter>();
 		services.AddSingleton<AbstractSegment, AzContextSegment>();
 		services.AddSingleton<AbstractSegment, DateSegment>();
 		services.AddSingleton<AbstractSegment, GitSegment>();

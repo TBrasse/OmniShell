@@ -5,7 +5,6 @@ using Core.Resolver;
 using Core.Segments;
 using Core.Shell;
 using Core.Styles;
-using Core.Utils;
 using Microsoft.Extensions.DependencyInjection;
 
 internal class ConsoleConfiguration : ServiceConfiguration
@@ -16,7 +15,7 @@ internal class ConsoleConfiguration : ServiceConfiguration
 		services.AddSingleton<IConfigurationReader, FileConfigurationReader>();
 		services.AddSingleton<IPathProvider, PathProvider>();
 		services.AddSingleton<IShellExecutor, PowershellExecutor>();
-		services.AddSingleton<IProfileProvider, ProfileProvider>();
+		services.AddSingleton<IConfigReader, ConfigReader>();
 		services.AddSingleton<AbstractSegment, DateSegment>();
 		services.AddSingleton<AbstractSegment, NewLineSegment>();
 		services.AddSingleton<AbstractSegment, PathSegment>();

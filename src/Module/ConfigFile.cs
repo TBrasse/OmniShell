@@ -1,11 +1,11 @@
 ﻿using System;
 using System.IO;
 using System.Reflection;
-using Core.Utils;
+using Core;
 
 namespace Module
 {
-	internal static class ConfigFile
+    internal static class ConfigFile
 	{
 
 		public static void SetupConfigFile()

@@ -4,7 +4,6 @@ using Core.Resolver;
 using Core.Segments;
 using Core.Shell;
 using Core.Styles;
-using Core.Utils;
 
 namespace Module
 {
@@ -22,7 +21,7 @@ namespace Module
 			);
 			return new Omnishell
 			(
-				new ProfileProvider
+				new ConfigReader
 				(
 					new FileConfigurationReader
 					(
@@ -34,6 +33,13 @@ namespace Module
 						(
 							shellContext
 						)
+					)
+				),
+				new ConfigWriter
+				(
+					new FileConfigurationWriter
+					(
+						new PathProvider()
 					)
 				),
 				new SegmentRegistry

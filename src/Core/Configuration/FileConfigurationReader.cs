@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace Core.Utils;
+namespace Core;
 
 public class FileConfigurationReader : IConfigurationReader
 {

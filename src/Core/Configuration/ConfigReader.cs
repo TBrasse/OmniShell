@@ -1,14 +1,13 @@
 ﻿using Core.Shell;
-using Core.Utils;
 
 namespace Core;
 
-public class ProfileProvider : IProfileProvider
+public class ConfigReader : IConfigReader
 {
 	private readonly IConfigurationReader _configurationReader;
 	private readonly IShellExecutor _shell;
 
-	public ProfileProvider
+	public ConfigReader
 	(
 		IConfigurationReader configurationReader,
 		IShellExecutor shell
@@ -16,6 +15,11 @@ public class ProfileProvider : IProfileProvider
 	{
 		_configurationReader = configurationReader;
 		_shell = shell;
+	}
+
+	public Configuration GetConfiguration()
+	{
+		return _configurationReader.Read();
 	}
 
 	public Profile GetProfile()
