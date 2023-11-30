@@ -22,12 +22,12 @@ namespace Module
 			);
 			return new Omnishell
 			(
-				new ProfileProvider
+				new FileConfigurationReader
 				(
-					new FileConfigurationReader
-					(
-						new PathProvider()
-					),
+					new PathProvider()
+				),
+				new ConfigProvider
+				(
 					new PowershellExecutor
 					(
 						new HostPSSettingsProvider

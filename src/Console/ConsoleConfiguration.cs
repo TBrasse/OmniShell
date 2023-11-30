@@ -16,7 +16,7 @@ internal class ConsoleConfiguration : ServiceConfiguration
 		services.AddSingleton<IConfigurationReader, FileConfigurationReader>();
 		services.AddSingleton<IPathProvider, PathProvider>();
 		services.AddSingleton<IShellExecutor, PowershellExecutor>();
-		services.AddSingleton<IProfileProvider, ProfileProvider>();
+		services.AddSingleton<IConfigProvider, ConfigProvider>();
 		services.AddSingleton<AbstractSegment, DateSegment>();
 		services.AddSingleton<AbstractSegment, NewLineSegment>();
 		services.AddSingleton<AbstractSegment, PathSegment>();
