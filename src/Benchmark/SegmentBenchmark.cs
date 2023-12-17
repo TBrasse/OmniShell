@@ -20,18 +20,18 @@ public class SegmentBenchmark
 
 		_azContext = new AzContextSegment();
 		_dateSegment = new DateSegment();
-		_gitSegment = new GitSegment();
+		_gitSegment = new GitSegment(settingMoq.Object);
 		_pathSegment = new PathSegment();
 		_platformSegment = new PlatformSegment();
 	}
 
-	[Benchmark]
+	//[Benchmark]
 	public void AzContextSegment()
 	{
 		_azContext.Resolve(_shell);
 	}
 
-	[Benchmark]
+	//[Benchmark]
 	public void DataSegment()
 	{
 		_dateSegment.Resolve(_shell);
@@ -43,13 +43,13 @@ public class SegmentBenchmark
 		_gitSegment.Resolve(_shell);
 	}
 
-	[Benchmark]
+	//[Benchmark]
 	public void PathSegment()
 	{
 		_pathSegment.Resolve(_shell);
 	}
 
-	[Benchmark]
+	//[Benchmark]
 	public void PlatformSegment()
 	{
 		_platformSegment.Resolve(_shell);

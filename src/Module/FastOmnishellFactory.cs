@@ -13,12 +13,13 @@ namespace Module
 		public static IOmnishell BuildOmnishell()
 		{
 			IPSContext shellContext = new HostPSContext();
+			IPSSettingProvider settingProvider = new HostPSSettingsProvider
+			(
+				shellContext
+			);
 			PowershellExecutor shell = new PowershellExecutor
 			(
-				new HostPSSettingsProvider
-				(
-					shellContext
-				)
+				settingProvider
 			);
 			return new Omnishell
 			(
@@ -30,10 +31,7 @@ namespace Module
 				(
 					new PowershellExecutor
 					(
-						new HostPSSettingsProvider
-						(
-							shellContext
-						)
+						settingProvider
 					)
 				),
 				new SegmentRegistry
@@ -41,7 +39,7 @@ namespace Module
 					new AbstractSegment[] {
 						new AzContextSegment(),
 						new DateSegment(),
-						new GitSegment(),
+						new GitSegment(settingProvider),
 						new NewLineSegment(),
 						new PathSegment(),
 						new PlatformSegment(),

@@ -1,32 +1,65 @@
 ﻿using Core.Shell;
+using System.Text.RegularExpressions;
 
 namespace Core.Segments;
 
 public class GitSegment : AbstractSegment
 {
-	private string[] _expressions { get; } = new[] {
-		"git branch --show-current",
-		"git status -s"
-	};
+	private string _expression { get; } = "git status -s";
+	public IPSSettingProvider _settings { get; }
 
-	public GitSegment()
+	public GitSegment(IPSSettingProvider settings)
 	{
 		Name = "git";
+		_settings = settings;
 	}
 
 	public override bool Resolve(IShellExecutor shell)
 	{
-		PowershellResult branchResult = shell.Execute(_expressions[0]);
-		if (!branchResult.Value.StartsWith("fatal:"))
+		var result = IsGitBranch();
+		if (result.Success)
 		{
-			Value = branchResult.Value;
-			PowershellResult rawStatusResult = shell.Execute(_expressions[1], true);
+			Value = GetBranchName(result.GitPath);
+			PowershellResult rawStatusResult = shell.Execute(_expression, true);
 			if (!string.IsNullOrEmpty(rawStatusResult.Value))
 			{
 				ParsGitFiles(rawStatusResult);
 			}
+			return rawStatusResult.Successfull;
 		}
-		return branchResult.Successfull && !string.IsNullOrEmpty(branchResult.Value);
+		return false;
+	}
+
+	private string GetBranchName(string gitPath)
+	{
+		string HeadPath = $"{gitPath}{Path.DirectorySeparatorChar}HEAD";
+		string rawBranchName = File.OpenText(HeadPath).ReadToEnd();
+		Match match = Regex.Match(rawBranchName, @".*refs\/heads\/(?<branch>.*)");
+		return match.Groups["branch"].Value;
+	}
+
+	private (bool Success, string GitPath) IsGitBranch()
+	{
+		string path = _settings.WorkingDirectory;
+		string pathRoot = Path.GetPathRoot(path) ?? throw new InvalidOperationException($"Path not rooted: {path}");
+		char pathSeparator = Path.DirectorySeparatorChar;
+
+		string testPath;
+		do
+		{
+			testPath = Path.GetFullPath($"{path}{pathSeparator}");
+			string gitPath = $"{testPath}.git";
+			if (!Path.Exists(gitPath))
+			{
+				path += $"{pathSeparator}..";
+			}
+			else
+			{
+				return (true, gitPath);
+			}
+		}
+		while (testPath != pathRoot);
+		return (false, String.Empty);
 	}
 
 	private void ParsGitFiles(PowershellResult rawStatusResult)

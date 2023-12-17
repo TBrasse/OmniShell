@@ -5,9 +5,9 @@ internal class Program
 {
 	private static void Main(string[] args)
 	{
-		var summary = BenchmarkRunner.Run<SegmentBenchmark>();
-		//(
-		//	new DebugInProcessConfig()
-		//);
+		var summary = BenchmarkRunner.Run<SegmentBenchmark>
+		(
+			new DebugInProcessConfig()
+		);
 	}
 }
