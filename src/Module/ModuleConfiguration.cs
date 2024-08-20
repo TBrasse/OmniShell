@@ -33,5 +33,6 @@ public class ModuleConfiguration : ServiceConfiguration
 		services.AddSingleton<IStyleRegistry, StyleRegistry>();
 		services.AddSingleton<IPSSettingProvider, HostPSSettingsProvider>();
 		services.AddSingleton<IPSContext, HostPSContext>();
+		services.AddSingleton<IObjectRepository, ObjectRepository>();
 	}
 }

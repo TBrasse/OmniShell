@@ -5,26 +5,29 @@ namespace Core.Utils;
 public class FileConfigurationReader : IConfigurationReader
 {
 	private readonly IPathProvider _pathProvider;
+	private readonly IObjectRepository _objectRepository;
 
 	public FileConfigurationReader
 	(
-		IPathProvider pathProvider
+		IPathProvider pathProvider,
+		IObjectRepository objectRepository
 	)
 	{
 		_pathProvider = pathProvider;
+		_objectRepository = objectRepository;
 	}
 
-	public Configuration Read()
+	public void ReadAndSet()
 	{
 		string configurationPath = _pathProvider.GetConfigurationPath();
 		string rawConfiguration = File.ReadAllText(configurationPath, Encoding.UTF8);
 		if (configurationPath.EndsWith(".json"))
 		{
-			return Serializer.SerializeFromJson(rawConfiguration);
+			_objectRepository.Configuration = Serializer.SerializeFromJson(rawConfiguration);
 		}
 		else if (configurationPath.EndsWith(".yml"))
 		{
-			return Serializer.SerializeFromYaml(rawConfiguration);
+			_objectRepository.Configuration = Serializer.SerializeFromYaml(rawConfiguration);
 		}
 		else
 		{
