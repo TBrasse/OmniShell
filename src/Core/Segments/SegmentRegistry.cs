@@ -21,7 +21,7 @@ public class SegmentRegistry : ISegmentRegistry
 		_objectRepository = objectRepository;
 	}
 
-	public void GetSegments()
+	public void ReadAndSetSegments()
 	{
 		List<AbstractSegment> segments = new List<AbstractSegment>();
 		foreach (string segmentName in _objectRepository.Profile.LinkedOrder)

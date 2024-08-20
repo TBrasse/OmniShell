@@ -2,6 +2,6 @@
 
 public interface ISegmentRegistry
 {
-	void GetSegments();
+	void ReadAndSetSegments();
 	void RegisterCustomSegments();
 }

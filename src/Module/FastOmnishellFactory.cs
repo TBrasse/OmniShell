@@ -69,7 +69,8 @@ namespace Module
 				),
 				new ModulePrinter
 				(
-					shellContext
+					shellContext,
+					objectRepository
 				),
 				shellContext,
 				objectRepository

@@ -45,10 +45,10 @@ public class Omnishell : IOmnishell
 		_configProvider.ReadAndSetProfile();
 		_configProvider.ReadAndSetFormats();
 		_segmentRegistry.RegisterCustomSegments();
-		_segmentRegistry.GetSegments();
+		_segmentRegistry.ReadAndSetSegments();
 		_segmentResolver.ResolveSegments();
 		_segmentPainter.PaintSegments();
-		_segmentPrinter.Print(_objectRepository.PaintedSegments);
+		_segmentPrinter.PrintSegments();
 		return _objectRepository.Prompt;
 	}
 }
