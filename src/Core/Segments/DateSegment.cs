@@ -13,8 +13,8 @@ public class DateSegment : AbstractSegment
 
 	public override bool Resolve(IShellExecutor shell)
 	{
-		PowershellResult result = shell.Execute(_expression);
-		Value = result.Value;
-		return result.Successfull && !string.IsNullOrEmpty(result.Value);
+		//PowershellResult result = shell.Execute(_expression);
+		Value = DateTime.Now.ToString("T");
+		return !string.IsNullOrEmpty(Value);
 	}
 }

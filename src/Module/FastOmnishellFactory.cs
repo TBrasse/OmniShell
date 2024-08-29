@@ -44,7 +44,7 @@ namespace Module
 						new DateSegment(),
 						new GitSegment(settingProvider),
 						new NewLineSegment(),
-						new PathSegment(),
+						new PathSegment(shellContext),
 						new PlatformSegment(),
 						new PromptSegment()
 					},

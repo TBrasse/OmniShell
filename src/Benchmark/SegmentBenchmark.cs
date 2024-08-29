@@ -1,4 +1,5 @@
 ﻿using BenchmarkDotNet.Attributes;
+using Core;
 using Core.Segments;
 using Core.Shell;
 using Moq;
@@ -16,12 +17,15 @@ public class SegmentBenchmark
 	{
 		Mock<IPSSettingProvider> settingMoq = new Mock<IPSSettingProvider>();
 		settingMoq.Setup(x => x.WorkingDirectory).Returns(@"D:\Temp");
-		_shell = new PowershellExecutor(settingMoq.Object);
 
+		Mock<IPSContext> shellContextMoq = new Mock<IPSContext>();
+		shellContextMoq.Setup(x => x.WorkingDir).Returns(@"D:\Temp");
+
+		_shell = new PowershellExecutor(settingMoq.Object);
 		_azContext = new AzContextSegment();
 		_dateSegment = new DateSegment();
 		_gitSegment = new GitSegment(settingMoq.Object);
-		_pathSegment = new PathSegment();
+		_pathSegment = new PathSegment(shellContextMoq.Object);
 		_platformSegment = new PlatformSegment();
 	}
 
