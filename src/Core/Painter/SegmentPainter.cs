@@ -21,24 +21,26 @@ public class SegmentPainter : ISegmentPainter
 
 	public void PaintSegments()
 	{
-		for (int index = 0; index < _objectRepository.OrderedSegments.Length; index++)
+		var segments = _objectRepository.OrderedSegments;
+		var formats = _objectRepository.Formats;
+		for (int index = 0; index < segments.Length; index++)
 		{
 			AbstractSegment previous = null, current, next = null;
-			current = _objectRepository.OrderedSegments[index];
-			current.Format = _objectRepository.Formats[current.Name];
+			current = segments[index];
+			current.Format = formats[current.Name];
 			if (index >= 1)
 			{
-				previous = _objectRepository.OrderedSegments[index - 1];
-				previous.Format = _objectRepository.Formats[previous.Name];
+				previous = segments[index - 1];
+				previous.Format = formats[previous.Name];
 			}
-			if (index < _objectRepository.OrderedSegments.Length - 1 && _objectRepository.OrderedSegments.Length > 1)
+			if (index < segments.Length - 1 && segments.Length > 1)
 			{
-				next = _objectRepository.OrderedSegments[index + 1];
-				next.Format = _objectRepository.Formats[next.Name];
+				next = segments[index + 1];
+				next.Format = formats[next.Name];
 			}
 			IStyle style = _styleRegistry.GetStyle(current.Format.Style);
 			style.ApplyStyle(current, previous, next);
 		}
-		_objectRepository.PaintedSegments = _objectRepository.OrderedSegments;
+		_objectRepository.PaintedSegments = segments;
 	}
 }

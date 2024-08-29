@@ -24,7 +24,8 @@ public class SegmentRegistry : ISegmentRegistry
 	public void ReadAndSetSegments()
 	{
 		List<AbstractSegment> segments = new List<AbstractSegment>();
-		foreach (string segmentName in _objectRepository.Profile.LinkedOrder)
+		var linkedOrder = _objectRepository.Profile.LinkedOrder;
+		foreach (string segmentName in linkedOrder)
 		{
 			if (_segmentsRegistry.ContainsKey(segmentName))
 				segments.Add(_segmentsRegistry[segmentName]);
@@ -34,15 +35,16 @@ public class SegmentRegistry : ISegmentRegistry
 
 	public void RegisterCustomSegments()
 	{
-		foreach (string segmentName in _objectRepository.Profile.Segments.Keys)
+		var segments = _objectRepository.Profile.Segments;
+		foreach (string segmentName in segments.Keys)
 		{
 			if (!_segmentsRegistry.ContainsKey(segmentName))
 			{
-				_segmentsRegistry[segmentName] = new CustomSegment(segmentName, _objectRepository.Profile.Segments[segmentName]);
+				_segmentsRegistry[segmentName] = new CustomSegment(segmentName, segments[segmentName]);
 			}
 			else if (_segmentsRegistry[segmentName] is CustomSegment)
 			{
-				((CustomSegment)_segmentsRegistry[segmentName]).Expression = _objectRepository.Profile.Segments[segmentName];
+				((CustomSegment)_segmentsRegistry[segmentName]).Expression = segments[segmentName];
 			}
 		}
 	}

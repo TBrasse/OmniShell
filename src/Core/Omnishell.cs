@@ -41,7 +41,7 @@ public class Omnishell : IOmnishell
 
 	public string PrintPrompt()
 	{
-		_configurationReader.ReadAndSet();
+		_configurationReader.ReadAndSetConfiguration();
 		_configProvider.ReadAndSetProfile();
 		_configProvider.ReadAndSetFormats();
 		_segmentRegistry.RegisterCustomSegments();

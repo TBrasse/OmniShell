@@ -21,16 +21,17 @@ public class ConfigProvider : IConfigProvider
 
 	public void ReadAndSetFormats()
 	{
-		Dictionary<string, Format> formats = _objectRepository.Configuration.Formats;
-		foreach (var formatName in _objectRepository.Profile.Formats.Keys)
+		var profile = _objectRepository.Profile; 
+		var formats = _objectRepository.Configuration.Formats;
+		foreach (var formatName in profile.Formats.Keys)
 		{
 			if (formats.ContainsKey(formatName))
 			{
-				formats[formatName] = _objectRepository.Profile.Formats[formatName];
+				formats[formatName] = profile.Formats[formatName];
 			}
 			else
 			{
-				formats.Add(formatName, _objectRepository.Profile.Formats[formatName]);
+				formats.Add(formatName, profile.Formats[formatName]);
 			}
 		}
 		_objectRepository.Formats = formats;

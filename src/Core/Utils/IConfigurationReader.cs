@@ -2,5 +2,5 @@
 
 public interface IConfigurationReader
 {
-	void ReadAndSet();
+	void ReadAndSetConfiguration();
 }

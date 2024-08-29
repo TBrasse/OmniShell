@@ -17,7 +17,7 @@ public class FileConfigurationReader : IConfigurationReader
 		_objectRepository = objectRepository;
 	}
 
-	public void ReadAndSet()
+	public void ReadAndSetConfiguration()
 	{
 		string configurationPath = _pathProvider.GetConfigurationPath();
 		string rawConfiguration = File.ReadAllText(configurationPath, Encoding.UTF8);
