@@ -1,22 +1,29 @@
 ﻿using Core;
 using Core.Painter;
 using Core.Segments;
+using Core.Utils;
 
 namespace Module;
 
 internal class ModulePrinter : ISegmentPrinter
 {
 	private readonly IPSContext _context;
+	private readonly IObjectRepository _objectRepository;
 
-	public ModulePrinter(IPSContext context)
+	public ModulePrinter
+	(
+		IPSContext context,
+		IObjectRepository objectRepository
+	)
 	{
 		_context = context;
+		_objectRepository = objectRepository;
 	}
 
 
-	public void Print(AbstractSegment[] paintedSegments)
+	public void PrintSegments()
 	{
-		foreach (var segment in paintedSegments)
+		foreach (var segment in _objectRepository.PaintedSegments)
 		{
 			PrintSegment(segment);
 		}

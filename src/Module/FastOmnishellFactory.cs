@@ -21,18 +21,21 @@ namespace Module
 			(
 				settingProvider
 			);
+			ObjectRepository objectRepository = new ObjectRepository();
 			return new Omnishell
 			(
 				new FileConfigurationReader
 				(
-					new PathProvider()
+					new PathProvider(),
+					objectRepository
 				),
 				new ConfigProvider
 				(
 					new PowershellExecutor
 					(
 						settingProvider
-					)
+					),
+					objectRepository
 				),
 				new SegmentRegistry
 				(
@@ -41,14 +44,16 @@ namespace Module
 						new DateSegment(),
 						new GitSegment(settingProvider),
 						new NewLineSegment(),
-						new PathSegment(),
+						new PathSegment(shellContext),
 						new PlatformSegment(),
 						new PromptSegment()
-					}
+					},
+					objectRepository
 				),
 				new SegmentResolver
 				(
-					shell
+					shell,
+					objectRepository
 				)
 				,
 				new SegmentPainter
@@ -59,13 +64,16 @@ namespace Module
 							new ClearStyle(),
 							new RibbonStyle()
 						}
-					)
+					),
+					objectRepository
 				),
 				new ModulePrinter
 				(
-					shellContext
+					shellContext,
+					objectRepository
 				),
-				shellContext
+				shellContext,
+				objectRepository
 			);
 		}
 	}

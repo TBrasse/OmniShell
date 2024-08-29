@@ -13,6 +13,8 @@ public class Omnishell : IOmnishell
 	private readonly ISegmentResolver _segmentResolver;
 	private readonly ISegmentPainter _segmentPainter;
 	private readonly ISegmentPrinter _segmentPrinter;
+	private readonly IObjectRepository _objectRepository;
+
 	public IPSContext Context { get; }
 
 	public Omnishell
@@ -23,7 +25,8 @@ public class Omnishell : IOmnishell
 		ISegmentResolver segmentResolver,
 		ISegmentPainter segmentPainter,
 		ISegmentPrinter segmentPrinter,
-		IPSContext shellContext
+		IPSContext shellContext,
+		IObjectRepository objectRepository
 	)
 	{
 		_configurationReader = configurationReader;
@@ -33,18 +36,19 @@ public class Omnishell : IOmnishell
 		_segmentPainter = segmentPainter;
 		_segmentPrinter = segmentPrinter;
 		Context = shellContext;
+		_objectRepository = objectRepository;
 	}
 
 	public string PrintPrompt()
 	{
-		Configuration configuration = _configurationReader.Read();
-		Profile profile = _configProvider.GetProfile(configuration);
-		Dictionary<string, Format> formats = _configProvider.GetFormats(configuration, profile);
-		_segmentRegistry.RegisterCustomSegments(profile.Segments);
-		AbstractSegment[] orderedSegments = _segmentRegistry.GetSegments(profile.LinkedOrder);
-		(AbstractSegment[] resolvedSegments, string[] promptSegments) = _segmentResolver.ResolveSegments(orderedSegments);
-		AbstractSegment[] paintedSegments = _segmentPainter.PaintSegments(resolvedSegments, formats);
-		_segmentPrinter.Print(paintedSegments);
-		return string.Join("", promptSegments);
+		_configurationReader.ReadAndSetConfiguration();
+		_configProvider.ReadAndSetProfile();
+		_configProvider.ReadAndSetFormats();
+		_segmentRegistry.RegisterCustomSegments();
+		_segmentRegistry.ReadAndSetSegments();
+		_segmentResolver.ResolveSegments();
+		_segmentPainter.PaintSegments();
+		_segmentPrinter.PrintSegments();
+		return _objectRepository.Prompt;
 	}
 }

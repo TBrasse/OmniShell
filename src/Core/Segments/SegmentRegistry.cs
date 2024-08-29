@@ -1,12 +1,16 @@
-﻿namespace Core.Segments;
+﻿using Core.Utils;
+
+namespace Core.Segments;
 
 public class SegmentRegistry : ISegmentRegistry
 {
 	private readonly Dictionary<string, AbstractSegment> _segmentsRegistry;
+	private readonly IObjectRepository _objectRepository;
 
 	public SegmentRegistry
 	(
-		IEnumerable<AbstractSegment> segments
+		IEnumerable<AbstractSegment> segments,
+		IObjectRepository objectRepository
 	)
 	{
 		_segmentsRegistry = new Dictionary<string, AbstractSegment>();
@@ -14,21 +18,24 @@ public class SegmentRegistry : ISegmentRegistry
 		{
 			_segmentsRegistry.Add(segment.Name, segment);
 		}
+		_objectRepository = objectRepository;
 	}
 
-	public AbstractSegment[] GetSegments(LinkedList<string> linkedOrder)
+	public void ReadAndSetSegments()
 	{
 		List<AbstractSegment> segments = new List<AbstractSegment>();
+		var linkedOrder = _objectRepository.Profile.LinkedOrder;
 		foreach (string segmentName in linkedOrder)
 		{
 			if (_segmentsRegistry.ContainsKey(segmentName))
 				segments.Add(_segmentsRegistry[segmentName]);
 		}
-		return segments.ToArray();
+		_objectRepository.OrderedSegments = segments.ToArray();
 	}
 
-	public void RegisterCustomSegments(Dictionary<string, string> segments)
+	public void RegisterCustomSegments()
 	{
+		var segments = _objectRepository.Profile.Segments;
 		foreach (string segmentName in segments.Keys)
 		{
 			if (!_segmentsRegistry.ContainsKey(segmentName))

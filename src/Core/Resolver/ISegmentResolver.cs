@@ -4,5 +4,5 @@ namespace Core.Resolver;
 
 public interface ISegmentResolver
 {
-	(AbstractSegment[], string[]) ResolveSegments(AbstractSegment[] orderedSegments);
+	void ResolveSegments();
 }

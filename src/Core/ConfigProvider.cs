@@ -7,18 +7,22 @@ namespace Core;
 public class ConfigProvider : IConfigProvider
 {
 	private readonly IShellExecutor _shell;
+	private readonly IObjectRepository _objectRepository;
 
 	public ConfigProvider
 	(
-		IShellExecutor shell
+		IShellExecutor shell,
+		IObjectRepository objectRepository
 	)
 	{
 		_shell = shell;
+		_objectRepository = objectRepository;
 	}
 
-	public Dictionary<string, Format> GetFormats(Configuration configuration, Profile profile)
+	public void ReadAndSetFormats()
 	{
-		Dictionary<string, Format> formats = configuration.Formats;
+		var profile = _objectRepository.Profile; 
+		var formats = _objectRepository.Configuration.Formats;
 		foreach (var formatName in profile.Formats.Keys)
 		{
 			if (formats.ContainsKey(formatName))
@@ -30,13 +34,13 @@ public class ConfigProvider : IConfigProvider
 				formats.Add(formatName, profile.Formats[formatName]);
 			}
 		}
-		return formats;
+		_objectRepository.Formats = formats;
 	}
 
-	public Profile GetProfile(Configuration configuration)
+	public void ReadAndSetProfile()
 	{
-		PowershellResult profileResult = _shell.Execute(configuration.Switch);
+		PowershellResult profileResult = _shell.Execute(_objectRepository.Configuration.Switch);
 		string profileName = profileResult.Successfull ? profileResult.Value : "default";
-		return configuration.Profiles[profileName];
+		_objectRepository.Profile = _objectRepository.Configuration.Profiles[profileName];
 	}
 }

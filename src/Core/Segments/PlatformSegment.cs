@@ -1,4 +1,5 @@
 ﻿using Core.Shell;
+using System.Runtime.InteropServices;
 
 namespace Core.Segments;
 
@@ -13,8 +14,26 @@ public class PlatformSegment : AbstractSegment
 
 	public override bool Resolve(IShellExecutor shell)
 	{
-		PowershellResult result = shell.Execute(Expression);
-		Value = result.Value;
-		return result.Successfull && !string.IsNullOrEmpty(result.Value);
+		if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+		{
+			Value = "";
+		}
+		else if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
+		{
+			Value = "";
+		}
+		else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+		{
+			Value = "";
+		}
+		else
+		{
+			Value = "?";
+			return false;
+		}
+		return true;
+		//PowershellResult result = shell.Execute(Expression);
+		//Value = result.Value;
+		//return result.Successfull && !string.IsNullOrEmpty(result.Value);
 	}
 }
