@@ -21,7 +21,7 @@ public class SegmentPainter : ISegmentPainter
 
 	public void PaintSegments()
 	{
-		var segments = _objectRepository.OrderedSegments;
+		var segments = _objectRepository.ResolvedRepository;
 		var formats = _objectRepository.Formats;
 		for (int index = 0; index < segments.Length; index++)
 		{
