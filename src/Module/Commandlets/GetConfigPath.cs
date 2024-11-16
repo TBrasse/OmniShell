@@ -13,7 +13,8 @@ public class GetConfigPath : PSCmdlet
 	{
 		if (pathProvider == null)
 		{
-			pathProvider = OmnishellFactory<ModuleConfiguration>.Build<IPathProvider>();
+			//pathProvider = OmnishellFactory<ModuleConfiguration>.Build<IPathProvider>();
+			pathProvider = FastOmnishellFactory.BuildPathProvider();
 		}
 	}
 

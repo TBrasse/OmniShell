@@ -13,7 +13,8 @@ public class GetPromptCmd : PSCmdlet
 	{
 		if (_omnishell == null)
 		{
-			_omnishell = OmnishellFactory<ModuleConfiguration>.Build<IOmnishell>();
+			//_omnishell = OmnishellFactory<ModuleConfiguration>.Build<IOmnishell>();
+			_omnishell = FastOmnishellFactory.BuildOmnishell();
 			ConfigFile.SetupConfigFile();
 		}
 	}

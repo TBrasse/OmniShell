@@ -23,11 +23,11 @@ public class FileConfigurationReader : IConfigurationReader
 		string rawConfiguration = File.ReadAllText(configurationPath, Encoding.UTF8);
 		if (configurationPath.EndsWith(".json"))
 		{
-			_objectRepository.Configuration = Serializer.SerializeFromJson(rawConfiguration);
+			_objectRepository.Configuration = Serializer.DeserializeFromJson(rawConfiguration);
 		}
 		else if (configurationPath.EndsWith(".yml"))
 		{
-			_objectRepository.Configuration = Serializer.SerializeFromYaml(rawConfiguration);
+			_objectRepository.Configuration = Serializer.DeserializeFromYaml(rawConfiguration);
 		}
 		else
 		{
