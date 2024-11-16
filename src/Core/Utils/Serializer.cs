@@ -4,10 +4,10 @@ using YamlDotNet.Serialization;
 
 namespace Core.Utils
 {
-	internal static class Serializer
+	public static class Serializer
 	{
 
-		public static Configuration SerializeFromJson(string rawConfiguration)
+		public static Configuration DeserializeFromJson(string rawConfiguration)
 		{
 			JsonSerializerOptions options = new JsonSerializerOptions
 			{
@@ -18,10 +18,16 @@ namespace Core.Utils
 			return JsonSerializer.Deserialize<Configuration>(rawConfiguration, options);
 		}
 
-		public static Configuration SerializeFromYaml(string rawConfiguration)
+		public static Configuration DeserializeFromYaml(string rawConfiguration)
 		{
 			IDeserializer deserializer = new DeserializerBuilder().Build();
 			return deserializer.Deserialize<Configuration>(rawConfiguration);
+		}
+
+		public static string SerializeToYaml(Configuration config)
+		{
+			ISerializer serializer = new SerializerBuilder().Build();
+			return serializer.Serialize(config);
 		}
 	}
 }

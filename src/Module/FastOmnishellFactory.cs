@@ -76,5 +76,10 @@ namespace Module
 				objectRepository
 			);
 		}
+
+		public static IPathProvider BuildPathProvider()
+		{
+			return new PathProvider();
+		}
 	}
 }

@@ -7,16 +7,7 @@ Profiles:
       path, newLine,
       prompt
     ]
-    Formats:
-      platform:  { Style: ribbon, Foreground: Black, Background: Blue }
-      date:      { Style: ribbon, Foreground: Black, Background: DarkGray }
-      pid:       { Style: ribbon, Foreground: Gray, Background: DarkBlue }
-      azcontext: { Style: ribbon, Foreground: Black, Background: DarkGray }
-      git:       { Style: ribbon, Foreground: Black, Background: Green }
-      vpnTest:   { Style: ribbon, Foreground: Black, Background: Red }
-      newLine:   { Style: clear }
-      path:      { Style: clear, Foreground: White }
-      prompt:    { Style: clear, Foreground: White }
+    Formats: {}
     Styles: {}
     Segments: 
       pid: '$PID'
@@ -26,16 +17,17 @@ Profiles:
       path, newLine,
       prompt
     ]
-    Formats:
-      platform:  { Style: ribbon, Foreground: Black, Background: Blue }
-      date:      { Style: ribbon, Foreground: Black, Background: DarkGray }
-      pid:       { Style: ribbon, Foreground: Gray, Background: DarkBlue }
-      azcontext: { Style: ribbon, Foreground: Black, Background: DarkGray }
-      git:       { Style: ribbon, Foreground: Black, Background: Green }
-      vpnTest:   { Style: ribbon, Foreground: Black, Background: Red }
-      newLine:   { Style: clear }
-      path:      { Style: clear, Foreground: White }
-      prompt:    { Style: clear, Foreground: White }
+    Formats: {}
     Styles: {}
     Segments: 
       pid: '$PID'
+Formats:
+  platform:  { Style: ribbon, Foreground: Black, Background: Blue }
+  date:      { Style: ribbon, Foreground: Black, Background: DarkGray }
+  pid:       { Style: ribbon, Foreground: Gray, Background: DarkBlue }
+  azcontext: { Style: ribbon, Foreground: Black, Background: DarkGray }
+  git:       { Style: ribbon, Foreground: Black, Background: Green }
+  vpnTest:   { Style: ribbon, Foreground: Black, Background: Red }
+  newLine:   { Style: clear }
+  path:      { Style: clear, Foreground: White }
+  prompt:    { Style: clear, Foreground: White }
