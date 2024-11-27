@@ -23,6 +23,7 @@ public class GetPromptCmd : PSCmdlet
 	{
 		_omnishell.Context.Host = Host;
 		_omnishell.Context.WorkingDir = SessionState.Path.CurrentFileSystemLocation.Path;
+		_omnishell.Context.PowershellPath = SessionState.Path.CurrentLocation.Path;
 	}
 
 	protected override void ProcessRecord()

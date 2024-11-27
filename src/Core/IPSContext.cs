@@ -6,5 +6,6 @@ namespace Core
 	{
 		public PSHost Host { get; set; }
 		public string WorkingDir { get; set; }
+		string PowershellPath { get; set; }
 	}
 }
