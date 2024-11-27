@@ -20,7 +20,7 @@ public class PathSegment : AbstractSegment
 	{
 		if (_context.WorkingDir != null)
 		{
-			Value = _context.WorkingDir;
+			Value = _context.PowershellPath;
 			return true;
 		}
 		PowershellResult result = shell.Execute(_expression);
